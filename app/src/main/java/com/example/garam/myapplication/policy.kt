@@ -84,8 +84,8 @@ class policy : AppCompatActivity() {
                 id: Long
             ) {
                when(position){
-                   1 -> webView.loadUrl("http://api.korea.go.kr/openapi/svc/list?lrgAstCd=&mdmAstCd=&smallAstCd=&jrsdOrgCd=6110000&srhQuery=%EB%85%B8%EC%88%99%EC%9D%B8&DATE&pageIndex=1&pageSize=5&format=html&serviceKey=GQOMc1HbWO7YPxXTvHmKsEcMapeqMjtBbxH8heT31xs9hJgfWWa8Q6y8gLBadFds6ZLL7V9D3ZBJPu9F%2FJE3%2Bg%3D%3D")
-                   2 -> webView.loadUrl("http://api.korea.go.kr/openapi/svc/list?lrgAstCd=&mdmAstCd=&smallAstCd=&jrsdOrgCd=&srhQuery=%EB%85%B8%EC%88%99%EC%9D%B8&DATE&pageIndex=1&pageSize=5&format=html&serviceKey=GQOMc1HbWO7YPxXTvHmKsEcMapeqMjtBbxH8heT31xs9hJgfWWa8Q6y8gLBadFds6ZLL7V9D3ZBJPu9F%2FJE3%2Bg%3D%3D")
+                   1 -> webView.loadUrl("http://api.korea.go.kr/openapi/svc/list?lrgAstCd=&mdmAstCd=&smallAstCd=&jrsdOrgCd=6110000&srhQuery=%EB%85%B8%EC%88%99%EC%9D%B8&DATE&pageIndex=1&pageSize=5&format=html&serviceKey=정부24API")
+                   2 -> webView.loadUrl("http://api.korea.go.kr/openapi/svc/list?lrgAstCd=&mdmAstCd=&smallAstCd=&jrsdOrgCd=&srhQuery=%EB%85%B8%EC%88%99%EC%9D%B8&DATE&pageIndex=1&pageSize=5&format=html&serviceKey=정부24API")
                    3 -> webView.loadUrl("https://02ef09c7.ngrok.io/map")
                }
             }
@@ -96,7 +96,6 @@ class policy : AppCompatActivity() {
               run()
           }
           thread.start()
-//        webView.loadUrl("http://api.korea.go.kr/openapi/svc/list?lrgAstCd=&mdmAstCd=&smallAstCd=&jrsdOrgCd=&srhQuery=%EB%85%B8%EC%88%99%EC%9D%B8&DATE&pageIndex=1&pageSize=10&format=html&serviceKey=GQOMc1HbWO7YPxXTvHmKsEcMapeqMjtBbxH8heT31xs9hJgfWWa8Q6y8gLBadFds6ZLL7V9D3ZBJPu9F%2FJE3%2Bg%3D%3D")
 
         }
     override fun onBackPressed() {
