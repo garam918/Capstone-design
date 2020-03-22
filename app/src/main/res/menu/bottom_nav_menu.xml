@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_house_24px"
+        android:title="보호시설" />
+
+    <item
+        android:id="@+id/navigation_freefood"
+        android:icon="@drawable/ic_fastfood_24px"
+        android:title="무료급식" />
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/ic_local_hospital_24px"
+        android:title="의료시설" />
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/ic_people_24px"
+        android:title="상담시설" />
+    <item
+        android:id="@+id/navigation_job"
+        android:icon="@drawable/ic_work_24px"
+        android:title="구인구직" />
+
+</menu>

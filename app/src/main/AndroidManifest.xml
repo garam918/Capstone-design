@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.garam.myapplication">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".network.ApplicationController"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/ic_noun_homeless_outreach"
+        android:label="YES숙"
+        tools:replace="android:label"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@drawable/ic_noun_homeless_outreach"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Food"
+            android:theme="@style/Theme.AppCompat.Dialog"></activity>
+
+        <activity
+            android:name=".AudioRecord"
+            android:label="목소리 녹음"
+            android:theme="@style/Theme.AppCompat.Dialog" />
+        <activity
+            android:name=".ManagerCreate"
+            android:label="관리자 회원가입"
+            android:theme="@style/Theme.AppCompat.Dialog" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/Theme.AppCompat.Dialog" />
+        <activity
+            android:name=".AnyOrientationCaptureActivity"
+            android:screenOrientation="fullSensor"
+            android:stateNotNeeded="true"
+            android:theme="@style/zxing_CaptureTheme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:replace="screenOrientation" />
+        <activity
+            android:name=".popup"
+            android:theme="@style/Theme.AppCompat.Dialog" />
+        <activity
+            android:name=".money"
+            android:label="귀향여비" />
+        <activity
+            android:name=".policy"
+            android:label="정책알림" />
+        <activity
+            android:name=".fragmap"
+            android:label="YES숙" />
+        <activity
+            android:name=".QrcodeCreate"
+            android:label="사용자 회원가입"
+            android:theme="@style/Theme.AppCompat.Dialog" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.garam.myapplication.fileprovider"
+            android:exported="false"
+            android:readPermission="com.example.garam.myapplication.READ_CONTENT"
+            android:writePermission="com.example.garam.myapplication.READ_CONTENT"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
+
+        <activity
+            android:name=".Volunteer"
+            android:label="관리자 메뉴"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="2051351acadf3e9d1ecb9ae88257be3b" />
+    </application>
+
+</manifest>
