@@ -2,7 +2,6 @@ package com.example.garam.myapplication
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.media.AudioFormat
 import android.media.MediaRecorder
 import android.os.Bundle
 import android.widget.Button
@@ -27,27 +26,20 @@ class AudioRecord : AppCompatActivity() {
         val okbutton = findViewById<Button>(R.id.button5)
         val recorder = MediaRecorder()
         val path = cacheDir.path + "/" + "recorder.wav"
+        val path2 = cacheDir.path + "/" + "recorder2.wav"
         val waveRecorder = WaveRecorder(path)
-
+        val waveRecorder2 = WaveRecorder(path2)
         recordbutton.setOnClickListener {
-            /*val path = cacheDir.path + "/" + "recorder.mp3"
-            recorder.setAudioSource(MediaRecorder.AudioSource.MIC)
-            recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
-            recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
-            recorder.setOutputFile(path)
-            recorder.prepare()
-            recorder.start() */
-            waveRecorder.waveConfig.sampleRate = 44100
-            waveRecorder.waveConfig.channels = AudioFormat.CHANNEL_IN_STEREO
-            waveRecorder.waveConfig.audioEncoding = AudioFormat.ENCODING_PCM_8BIT
+           Toast.makeText(this,"녹음을 시작합니다",Toast.LENGTH_SHORT).show()
+           // waveRecorder.waveConfig.sampleRate = 44100
+           // waveRecorder.waveConfig.channels = AudioFormat.CHANNEL_IN_STEREO
+           // waveRecorder.waveConfig.audioEncoding = AudioFormat.ENCODING_PCM_8BIT
+            waveRecorder.noiseSuppressorActive = true
             waveRecorder.startRecording()
         }
         okbutton.setOnClickListener {
-            Toast.makeText(this,"녹음 완료",Toast.LENGTH_LONG).show()
-            /*recorder.stop()
-            recorder.release()
-            finish()*/
             waveRecorder.stopRecording()
+            Toast.makeText(this,"녹음 완료",Toast.LENGTH_LONG).show()
             finish()
         }
     }

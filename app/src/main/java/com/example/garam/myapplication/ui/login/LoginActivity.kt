@@ -2,7 +2,6 @@ package com.example.garam.myapplication.ui.login
 
 import android.Manifest
 import android.app.Activity
-import android.app.Dialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -36,7 +35,6 @@ import com.google.gson.JsonParser
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -58,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
         lateinit var toast: Toast
         if (System.currentTimeMillis() >= backKeyPressedTime + 1500) {
             backKeyPressedTime = System.currentTimeMillis()
-            toast = Toast.makeText(this, "\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_LONG)
+            toast = Toast.makeText(this, "종료하려면 한번 더 누르세요.", Toast.LENGTH_LONG)
             toast.show()
             return
         }
@@ -67,7 +65,6 @@ class LoginActivity : AppCompatActivity() {
             moveTaskToBack(true)
             finishAndRemoveTask()
             android.os.Process.killProcess(android.os.Process.myPid())
-            //           toast.cancel()
         }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,8 +90,6 @@ class LoginActivity : AppCompatActivity() {
             })
             builder.show()
 
-            //val nextIntent = Intent(this, QrcodeCreate::class.java)
-            //startActivity(nextIntent)
         }
         val loading = findViewById<ProgressBar>(R.id.loading)
         val obj = JSONObject()
@@ -111,26 +106,9 @@ class LoginActivity : AppCompatActivity() {
             loginTry.enqueue(object : Callback<JsonObject>{
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     Log.e("로그인", response.body()?.toString())
-                      /*  val nname = response.body()!!.get("name").asString
-                        val qr = response.body()!!.get("QR").asString
-                        val date = response.body()!!.get("created_at").asString
-                        val sex = response.body()!!.get("sex").asString
-                        val gohome = response.body()!!.get("gohome").asString
-                        val year = response.body()!!.get("year").asString
-                        val face = response.body()!!.get("Faceimg").asString */
                         val place = response.body()!!.get("foodPlace").asString
-                       // Log.e("이름",nname)
                         val nextIntent = Intent(this@LoginActivity, Volunteer::class.java)
-                      //  val nextIntent = Intent(this@LoginActivity, fragmap::class.java)
                         nextIntent.putExtra("info","$place")
-                        /*
-                        nextIntent.putExtra("QR",qr)
-                        nextIntent.putExtra("Face",face)
-                        nextIntent.putExtra("name",nname)
-                        nextIntent.putExtra("date",date)
-                        nextIntent.putExtra("sex",sex)
-                        nextIntent.putExtra("gohome",gohome)
-                        nextIntent.putExtra("year",year)*/
                         Toast.makeText(this@LoginActivity,"로그인 성공!",Toast.LENGTH_LONG).show()
                         startActivity(nextIntent)
 
@@ -169,6 +147,7 @@ class LoginActivity : AppCompatActivity() {
                     )
                     image.putExtra(MediaStore.EXTRA_OUTPUT, providerURI)
                     startActivityForResult(image, 40)
+
                 } else if (which ==1){
                     val nextIntent = Intent(this,AudioRecord::class.java)
                     if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
@@ -187,7 +166,6 @@ class LoginActivity : AppCompatActivity() {
             .get(LoginViewModel::class.java)
         loginViewModel.loginFormState.observe(this, Observer {
             val loginState = it ?: return@Observer
-            // disable login button unless both username / password is valid
             login.isEnabled = loginState.isDataValid
 
             if (loginState.usernameError != null) {
@@ -210,7 +188,6 @@ class LoginActivity : AppCompatActivity() {
             }
             setResult(Activity.RESULT_OK)
 
-            //Complete and destroy login activity once successful
             finish()
         })
         username.afterTextChanged {
@@ -240,19 +217,73 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+    private fun performCrop(){
+        val cropIntent = Intent("com.android.camera.action.CROP")
+        cropIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+        cropIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        cropIntent.setDataAndType(providerURI,"image/*")
+        cropIntent.putExtra("crop",true)
+        cropIntent.putExtra("aspectX",1)
+        cropIntent.putExtra("aspectY",1)
+        cropIntent.putExtra("outputX",256)
+        cropIntent.putExtra("outputY",256)
+        cropIntent.putExtra("scale",true)
+        cropIntent.putExtra("output",providerURI)
+        cropIntent.putExtra("return-data",true)
+        startActivityForResult(cropIntent,33)
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == 40){
+            performCrop()
+
+        }
+        else if (requestCode == 99){
+
+            val audioBody = RequestBody.create("audio/wav".toMediaTypeOrNull(),File(cacheDir.path + "/" + "recorder.wav"))
+            Log.e("ㅇㄻ","$audioBody")
+            mAudio = MultipartBody.Part.createFormData("voice", "voice.wav", audioBody)
+            val audiofile = RequestBody.create("text/plain".toMediaTypeOrNull(),"voice")
+            val postvoice : Call<JsonObject> = networkService.audioLogin(mAudio)
+            postvoice.enqueue(object : Callback<JsonObject>{
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    Log.e("에러","$t")
+                }
+
+                override fun onResponse(
+                    call: Call<JsonObject>,
+                    response: Response<JsonObject>
+                ) {
+                    Log.e("음성 로그인","${response.body()}")
+                    val nname = response.body()!!.get("name").asString
+                    val qr = response.body()!!.get("QR").asString
+                    val date = response.body()!!.get("created_at").asString
+                    val sex = response.body()!!.get("sex").asString
+                    val gohome = response.body()!!.get("gohome").asString
+                    val year = response.body()!!.get("year").asString
+                    val face = response.body()!!.get("Faceimg").asString
+                    val nextIntent = Intent (this@LoginActivity,fragmap::class.java)
+                    nextIntent.putExtra("name",nname)
+                    nextIntent.putExtra("date",date)
+                    nextIntent.putExtra("sex",sex)
+                    nextIntent.putExtra("gohome",gohome)
+                    nextIntent.putExtra("year",year)
+                    nextIntent.putExtra("QR",qr)
+                    nextIntent.putExtra("Face",face)
+                    startActivity(nextIntent)
+                }
+            })
+        }
+        else if (requestCode == 33){
             val options = BitmapFactory.Options()
             val inputStream: InputStream = contentResolver.openInputStream(providerURI)
             val bitmap = BitmapFactory.decodeStream(inputStream, null, options)
             val byteArrayOutputStream = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 60, byteArrayOutputStream)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
             val photoBody2 = RequestBody.create(
                 "image/*".toMediaTypeOrNull(),
                 byteArrayOutputStream.toByteArray()
             )
-          //  val imagefile = RequestBody.create("text/plain".toMediaTypeOrNull(), "face")
             mImage = MultipartBody.Part.createFormData(
                 "face",
                 "face.jpg",
@@ -290,28 +321,6 @@ class LoginActivity : AppCompatActivity() {
             })
 
         }
-        else if (requestCode == 99){
-
-            val audioBody = RequestBody.create("audio/wav".toMediaTypeOrNull(),File(cacheDir.path + "/" + "recorder.wav"))
-            Log.e("ㅇㄻ","$audioBody")
-            mAudio = MultipartBody.Part.createFormData("voice", "voice.wav", audioBody)
-            val audiofile = RequestBody.create("text/plain".toMediaTypeOrNull(),"voice")
-            val postvoice : Call<ResponseBody> = networkService.audioLogin(mAudio)
-            postvoice.enqueue(object : Callback<ResponseBody>{
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    Log.e("에러","$t")
-                }
-
-                override fun onResponse(
-                    call: Call<ResponseBody>,
-                    response: Response<ResponseBody>
-                ) {
-                    Log.e("음성 로그인","${response.body()}")
-                    val nextIntent = Intent (this@LoginActivity,fragmap::class.java)
-                    startActivity(nextIntent)
-                }
-            })
-        }
     }
 
     private fun updateUiWithUser(model: LoggedInUserView) {
@@ -339,4 +348,5 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
 
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
     })
+
 }

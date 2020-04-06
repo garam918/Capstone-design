@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -15,13 +16,11 @@ import com.example.garam.myapplication.network.ApplicationController
 import com.example.garam.myapplication.network.NetworkService
 import com.google.gson.JsonObject
 import com.google.zxing.integration.android.IntentIntegrator
-import kotlinx.android.synthetic.main.activity_volunteer.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.json.JSONException
 import org.json.JSONObject
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,21 +31,50 @@ class Volunteer : AppCompatActivity() {
     private val networkService : NetworkService by lazy {
         ApplicationController.instance.networkService
     }
+    private var backKeyPressedTime :Long= 0
+
+    override fun onBackPressed() {
+        lateinit var toast: Toast
+        if (System.currentTimeMillis() >= backKeyPressedTime + 1500) {
+            backKeyPressedTime = System.currentTimeMillis()
+            toast = Toast.makeText(this, "종료 하려면 한번 더 누르세요.", Toast.LENGTH_LONG)
+            toast.show()
+            return
+        }
+        if (System.currentTimeMillis() < backKeyPressedTime + 1500) {
+            finish()
+            moveTaskToBack(true)
+            finishAndRemoveTask()
+            android.os.Process.killProcess(android.os.Process.myPid())
+        }
+    }
     lateinit var info: String
     private var mImage : MultipartBody.Part? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_volunteer)
         val intent = intent
-        val face = intent.getStringExtra("face")
-        val qrimg = intent.getStringExtra("QR")
-     //   info = intent.getStringExtra("info")
-        info = "만수종합사회복지관"
+        info = intent.getStringExtra("info")
+     //   info = "만수종합사회복지관"
+        val facility = findViewById<TextView>(R.id.facility)
+        facility.text = "시설 정보 : $info"
         Log.e("시설","$info")
         val button = findViewById<Button>(R.id.button)
         val food = findViewById<Button>(R.id.food)
-        val iv = findViewById<ImageView>(R.id.imageView)
-        Glide.with(this@Volunteer.applicationContext).load("http://f97ee76d.ngrok.io/$qrimg").error(R.drawable.ic_home_black_24dp).into(iv)
+
+        val testButton = findViewById<Button>(R.id.testButton)
+        testButton.setOnClickListener {
+            val test:Call<JsonObject> = networkService.test()
+            test.enqueue(object :Callback<JsonObject>{
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+
+                }
+
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    Log.e("테스트","${response.body()}")
+                }
+            })
+        }
         button.setOnClickListener {
             requestPermissions(arrayOf(Manifest.permission.CAMERA),100)
             val intentIntegrator = IntentIntegrator(this)
@@ -59,7 +87,7 @@ class Volunteer : AppCompatActivity() {
         }
         food.setOnClickListener {
             val nextIntent = Intent(this,Food::class.java)
-        //    nextIntent.putExtra("Info",info)
+            nextIntent.putExtra("Info",info)
             startActivity(nextIntent)
         }
     }
@@ -73,22 +101,13 @@ class Volunteer : AppCompatActivity() {
                 try {
                     val img = File(result.barcodeImagePath)
                     val bitmap = BitmapFactory.decodeFile(img.absolutePath)
-                    val iv = findViewById<ImageView>(R.id.imageView)
-               //     val obj = JSONObject()
-                    //     obj.put("name",info)
-                    iv.setImageBitmap(bitmap)
-                    //     val jsonpost = obj.toString()
-                    //  var obj = JSONObject(result.contents)
-                    val qrpath = result.barcodeImagePath
                     val byteArrayOutputSystem = ByteArrayOutputStream()
                     bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputSystem)
                     val photoBody = RequestBody.create("image/jpg".toMediaTypeOrNull(),byteArrayOutputSystem.toByteArray())
                     mImage = MultipartBody.Part.createFormData("qr","qr.jpg",photoBody)
-                    val imagefile = RequestBody.create("text/plain".toMediaTypeOrNull(),"qr")
                     val nameinfo = RequestBody.create("text/plain".toMediaTypeOrNull(),info)
-                    Log.e("ㄹㅇㅋㄴㄹ",info)
                     Log.e("시설정보","$info")
-                    val postimage: Call<String> = networkService.imageTest2(mImage,imagefile,nameinfo)
+                    val postimage: Call<String> = networkService.imageTest2(mImage,nameinfo)
                     postimage.enqueue(object: Callback<String>
                     {
                         override fun onFailure(call: Call<String>, t: Throwable) {
@@ -102,10 +121,7 @@ class Volunteer : AppCompatActivity() {
                            Log.e("통신 성공", response.body())
                         }
                     })
-                    val nextIntent = Intent(this,popup::class.java)
 
-                    nextIntent.putExtra("qrpath",qrpath)
-                 //   startActivity(nextIntent)
                 } catch (e: JSONException){
                       e.printStackTrace()
                 }

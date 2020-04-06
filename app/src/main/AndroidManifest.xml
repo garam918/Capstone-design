@@ -94,7 +94,19 @@
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="카카오API" />
+            android:value="2051351acadf3e9d1ecb9ae88257be3b" />
+
+
+        <service
+            android:name=".FirebaseTest"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+
     </application>
 
 </manifest>

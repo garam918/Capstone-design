@@ -1,18 +1,13 @@
 package com.example.garam.myapplication
 
 import android.Manifest
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.media.MediaRecorder
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
-import android.print.PrintJobId
-import android.print.PrinterId
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
@@ -44,7 +39,6 @@ import java.util.*
 
 class QrcodeCreate : AppCompatActivity() {
     private var providerURI: Uri? = null
-    private var providerURI2: Uri? = null
     private var mImage : MultipartBody.Part? = null
     private var mImage2 : MultipartBody.Part? = null
     private var mAudio : MultipartBody.Part? = null
@@ -234,19 +228,12 @@ class QrcodeCreate : AppCompatActivity() {
             performCrop()
             iv.setImageURI(providerURI)
         } else if (requestCode == 33){
-        //    val extras: Bundle = data!!.extras
-       //     val thePic : Bitmap = extras.getParcelable("data")
 
-        //    iv.setImageBitmap(thePic)
-        //    iv.setImageURI(providerURI2)
         }
     }
     private fun performCrop(){
         val cropIntent = Intent("com.android.camera.action.CROP")
-        val imageFile = File.createTempFile("IMG", ".jpg", cacheDir)
 
-//        cropIntent.flags = Intent.FLAG_GRANT_WRITE_URI_PERMISSION
-//        cropIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
         cropIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         cropIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         cropIntent.setDataAndType(providerURI,"image/*")
@@ -256,16 +243,7 @@ class QrcodeCreate : AppCompatActivity() {
         cropIntent.putExtra("outputX",256)
         cropIntent.putExtra("outputY",256)
         cropIntent.putExtra("scale",true)
-        /*providerURI2 = FileProvider.getUriForFile(
-            applicationContext,
-            "com.example.garam.myapplication.fileprovider",
-            imageFile
-        ) */
-       // grantUriPermission(packageName,providerURI2,Intent.FLAG_GRANT_READ_URI_PERMISSION)
-       // grantUriPermission(packageName,providerURI2,Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         cropIntent.putExtra("output",providerURI)
-       // cropIntent.putExtra(Intent.EXTRA_STREAM, providerURI2)
-   //     cropIntent.putExtra(MediaStore.EXTRA_OUTPUT, providerURI2)
         cropIntent.putExtra("return-data",true)
         startActivityForResult(cropIntent,33)
     }

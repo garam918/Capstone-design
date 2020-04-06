@@ -86,7 +86,6 @@ class policy : AppCompatActivity() {
                when(position){
                    1 -> webView.loadUrl("http://api.korea.go.kr/openapi/svc/list?lrgAstCd=&mdmAstCd=&smallAstCd=&jrsdOrgCd=6110000&srhQuery=%EB%85%B8%EC%88%99%EC%9D%B8&DATE&pageIndex=1&pageSize=5&format=html&serviceKey=정부24API")
                    2 -> webView.loadUrl("http://api.korea.go.kr/openapi/svc/list?lrgAstCd=&mdmAstCd=&smallAstCd=&jrsdOrgCd=&srhQuery=%EB%85%B8%EC%88%99%EC%9D%B8&DATE&pageIndex=1&pageSize=5&format=html&serviceKey=정부24API")
-                   3 -> webView.loadUrl("https://02ef09c7.ngrok.io/map")
                }
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {

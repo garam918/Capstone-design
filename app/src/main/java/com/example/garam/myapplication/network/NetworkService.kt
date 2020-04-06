@@ -17,7 +17,7 @@ interface NetworkService{
          @Body body: JsonObject
      ): Call<PostTest>
 
-    @POST("/freefood/foodcount")
+    @POST("/freefood/insertfood")
     fun foodTest(
         @Body body: JsonObject
     ): Call<JsonObject>
@@ -46,14 +46,14 @@ interface NetworkService{
     fun audioLogin(
         @Part audiofile : MultipartBody.Part?
 //        @Part("voice") audio : RequestBody
-    ): Call<ResponseBody>
+    ): Call<JsonObject>
 
 
     @Multipart
     @POST("/freefood/foodcount")
     fun imageTest2(
         @Part imagefile : MultipartBody.Part?,
-        @Part("imgFile") imgFile : RequestBody,
+ //       @Part("imgFile") imgFile : RequestBody,
         @Part ("name") json: RequestBody
     ): Call<String>
 
@@ -113,7 +113,7 @@ interface NetworkService{
         @Query("longitude") longitude: String
     ): Call<JsonArray>
 
-    @GET("/fileupload/nowcount")
+    @GET("/freefood/nowcount/")
     fun food(
         @Query("name") name : String
     ) : Call<String>
@@ -121,5 +121,10 @@ interface NetworkService{
     @POST("/manager/login")
     fun login(
         @Body loginInfo : JsonObject
+    ) : Call<JsonObject>
+
+    @POST("/sockettest")
+    fun test(
+
     ) : Call<JsonObject>
 }

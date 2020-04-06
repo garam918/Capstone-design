@@ -2,12 +2,14 @@ package com.example.garam.myapplication
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.garam.myapplication.network.ApplicationController
 
 class popup : AppCompatActivity() {
@@ -33,11 +35,12 @@ class popup : AppCompatActivity() {
         val qrimg = intent.getStringExtra("QR")
         val gohome = intent.getStringExtra("gohome")
         val imgUrl = ApplicationController.instance.baseURL
-        Glide.with(this).load("$imgUrl/$qrimg").error(R.drawable.ic_home_black_24dp).into(qr_img)
-        Glide.with(this).load("$imgUrl/$faceimg").error(R.drawable.ic_home_black_24dp).into(face)
+        Glide.with(this).load("$imgUrl/$qrimg").error(R.drawable.ic_home_black_24dp).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(qr_img)
+        Glide.with(this).load("$imgUrl/$faceimg").error(R.drawable.ic_home_black_24dp).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(face)
         id.text = "성별: $data_id"
         name.text = "이름: $data_name"
         age.text = "생년월일: $data_age"
+        Log.e("회원가입: " , "$dateInfo")
         date.text = "회원가입 시간: $dateInfo"
         if (gohome == "false"){
             home.text = "귀향여비 사용 여부: X"
