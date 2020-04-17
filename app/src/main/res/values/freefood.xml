@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="freefoodname">
+        <item>만수종합사회복지관</item>
+        <item>정겨운 수랏간</item>
+        <item>성요셉 무료급식소</item>
+        <item>성산효 마을봉사단</item>
+        <item>남동구노인복지관</item>
+        <item>충효사회복지센터</item>
+        <item>사랑의 나눔터</item>
+        <item>인천고잔사랑의무료급식</item>
+        <item>논현무료급식</item>
+        <item>남동구서창LH1단지무료급식소</item>
+        <item>송이무료급식소</item>
+        <item>사랑의무료급식소</item>
+        <item>사랑나눔회무료급식소</item>
+        <item>연수구노인복지관</item>
+        <item>연수종합사회복지관</item>
+        <item>청학노인복지관</item>
+        <item>선학종합사회복지관</item>
+        <item>세화종합사회복지관</item>
+        <item>송도노인복지관</item>
+        <item>중구노인복지관</item>
+        <item>성미가엘종합사회복지관</item>
+        <item>강화군노인복지관</item>
+        <item>동구노인복지관</item>
+        <item>성언의집</item>
+        <item>송현교회</item>
+        <item>창영사회복지관</item>
+        <item>네트워크</item>
+        <item>미추홀노인복지관</item>
+        <item>풍성하게</item>
+        <item>미추홀종합사회복지관</item>
+        <item>참사랑복지회</item>
+        <item>북도면무료급식소</item>
+        <item>연평면무료급식소</item>
+        <item>백령면무료급식소</item>
+        <item>대청면무료급식소</item>
+        <item>덕적면무료급식소</item>
+        <item>자월면무료급식소</item>
+        <item>영흥면무료급식소</item>
+        <item>내일을여는집</item>
+        <item>효성영광교회</item>
+        <item>동양노인문화센터</item>
+        <item>계산노인문화센터</item>
+        <item>계양구노인복지관</item>
+        <item>노인행복지원센터</item>
+        <item>계양종합사회복지관</item>
+        <item>서구노인복지관경로무료급식소</item>
+        <item>가좌노인문화센터경로무료급식소</item>
+        <item>연희노인문화센터경로무료급식소</item>
+        <item>검단노인복지관 경로식당</item>
+    </string-array>
+
+    <string-array name ="jobname">
+        <item>인천광역시 일자리 종합센터</item>
+        <item>인천중장년일자리희망센터</item>
+        <item>중구 일자리센터</item>
+        <item>동구 일자리센터</item>
+        <item>미추홀구 일자리센터</item>
+        <item>연수구 일자리센터</item>
+        <item>남동구 일자리센터</item>
+        <item>부평구 취업정보센터</item>
+        <item>계양구 일자리종합지원센터</item>
+        <item>인천고용복지센터</item>
+        <item>인천북부고용복지센터</item>
+        <item>인천서부고용복지센터</item>
+
+    </string-array>
+
+
+</resources>

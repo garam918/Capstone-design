@@ -19,6 +19,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.example.garam.myapplication.network.ApplicationController
 import com.example.garam.myapplication.network.NetworkService
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import com.google.zxing.BarcodeFormat
@@ -69,6 +71,18 @@ class QrcodeCreate : AppCompatActivity() {
         val yearSelect = findViewById<EditText>(R.id.year)
         val calSelect = findViewById<Button>(R.id.calsel)
         val audioRec = findViewById<Button>(R.id.audioRec)
+        var token: String? = null
+        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener(OnCompleteListener{
+            task->
+            if (!task.isSuccessful){
+                Log.w( "getInstanceId failed", task.exception)
+                return@OnCompleteListener
+            }
+            token = task.result?.token
+
+            // Log and toast
+            Log.e("토큰", token)
+        })
         audioRec.setOnClickListener {
             val nextIntent = Intent(this,AudioRecord::class.java)
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
@@ -125,7 +139,7 @@ class QrcodeCreate : AppCompatActivity() {
                     obj.put("name", name.text)
                     obj.put("year", year.text)
                     obj.put("sex", id.text)
-
+                    obj.put("token",token)
                     if ( providerURI == null ){
                         Toast.makeText(this@QrcodeCreate,"사진을 촬영해주세요",Toast.LENGTH_LONG).show()
                     } else if ( "${name.text}" == "") {
@@ -169,14 +183,14 @@ class QrcodeCreate : AppCompatActivity() {
                             "image/*".toMediaTypeOrNull(),
                             byteArrayOutputStream2.toByteArray()
                         )
-                        val audioBody = RequestBody.create("audio/mp3".toMediaTypeOrNull(),File(cacheDir.path + "/" + "recorder.mp3"))
+                        val audioBody = RequestBody.create("audio/wav".toMediaTypeOrNull(),File(cacheDir.path + "/" + "recorder.wav"))
                         mImage2 = MultipartBody.Part.createFormData(
                             "face",
                             "${year.text}" + ".jpg",
                             photoBody2
                         )
                         mAudio = MultipartBody.Part.createFormData(
-                            "audio", "${name.text}.mp3", audioBody
+                            "audio", "${name.text}.wav", audioBody
                         )
                         val imagefile2 =
                             RequestBody.create("text/plain".toMediaTypeOrNull(), "qr")

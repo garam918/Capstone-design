@@ -13,6 +13,7 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
 class FirebaseTest : FirebaseMessagingService() {
+
     override fun onNewToken(s: String?) {
         super.onNewToken(s)
         Log.e("FCM_TEST",s)

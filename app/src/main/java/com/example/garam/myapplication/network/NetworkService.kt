@@ -17,6 +17,11 @@ interface NetworkService{
          @Body body: JsonObject
      ): Call<PostTest>
 
+    @POST("/count")
+    fun menuCount(
+       @Body body : JsonObject
+    ): Call<JsonObject>
+
     @POST("/freefood/insertfood")
     fun foodTest(
         @Body body: JsonObject
@@ -106,12 +111,6 @@ interface NetworkService{
         @Query("y") latitude: Double,
         @Query("sort") sort: String
     ): Call<JsonObject>
-
-    @GET("/coffeeshop/nearshop")
-    fun coffee(
-        @Query("latitude") latitude: String,
-        @Query("longitude") longitude: String
-    ): Call<JsonArray>
 
     @GET("/freefood/nowcount/")
     fun food(

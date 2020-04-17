@@ -24,11 +24,8 @@ class AudioRecord : AppCompatActivity() {
         Toast.makeText(this,"버튼을 누르고 화면에 표시된 글자를 읽어주세요",Toast.LENGTH_LONG).show()
         val recordbutton = findViewById<Button>(R.id.button4)
         val okbutton = findViewById<Button>(R.id.button5)
-        val recorder = MediaRecorder()
         val path = cacheDir.path + "/" + "recorder.wav"
-        val path2 = cacheDir.path + "/" + "recorder2.wav"
         val waveRecorder = WaveRecorder(path)
-        val waveRecorder2 = WaveRecorder(path2)
         recordbutton.setOnClickListener {
            Toast.makeText(this,"녹음을 시작합니다",Toast.LENGTH_SHORT).show()
            // waveRecorder.waveConfig.sampleRate = 44100

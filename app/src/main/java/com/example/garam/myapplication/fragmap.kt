@@ -1,6 +1,7 @@
 package com.example.garam.myapplication
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -20,9 +21,13 @@ import com.example.garam.myapplication.R.layout.activity_fragmap
 import com.example.garam.myapplication.network.ApplicationController
 import com.example.garam.myapplication.network.KakaoApi
 import com.example.garam.myapplication.network.NetworkService
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import com.google.gson.JsonParser
+import com.google.protobuf.StringValue
 import net.daum.mf.map.api.CalloutBalloonAdapter
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
@@ -39,56 +44,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapViewEventListener {
     private var backKeyPressedTime :Long= 0
-    val map3 : Map<Int,String> = mapOf(0 to "만수종합사회복지관" ,
-            1 to "정겨운 수랏간",
-            2 to "성요셉 무료급식소",
-            3 to "성산효 마을봉사단",
-            4 to "남동구노인복지관",
-            5 to "충효사회복지센터",
-            6 to "사랑의 나눔터",
-            7 to "인천고잔사랑의무료급식",
-            8 to "논현무료급식",
-            9 to "남동구서창LH1단지무료급식소",
-            10 to "송이무료급식소",
-            11 to "사랑의무료급식소",
-            12 to "사랑나눔회무료급식소",
-            13 to "연수구노인복지관",
-            14 to "연수종합사회복지관",
-            15 to "청학노인복지관",
-            16 to "선학종합사회복지관",
-            17 to "세화종합사회복지관",
-            18 to "송도노인복지관",
-            19 to "중구노인복지관",
-            20 to "성미가엘종합사회복지관",
-            21 to "강화군노인복지관",
-            22 to "동구노인복지관",
-            23 to "성언의집",
-            24 to "송현교회",
-            25 to "창영사회복지관",
-            26 to "네트워크",
-            27 to "미추홀노인복지관",
-            28 to "풍성하게",
-            29 to "미추홀종합사회복지관",
-            30 to "참사랑복지회",
-            31 to "북도면무료급식소",
-            32 to "연평면무료급식소",
-            33 to "백령면무료급식소",
-            34 to "대청면무료급식소",
-            35 to "덕적면무료급식소",
-            36 to "자월면무료급식소",
-            37 to "영흥면무료급식소",
-            38 to "내일을여는집",
-            39 to "효성영광교회",
-            40 to "동양노인문화센터",
-            41 to "계산노인문화센터",
-            42 to "계양구노인복지관",
-            43 to "노인행복지원센터",
-            44 to "계양종합사회복지관",
-            45 to "서구노인복지관경로무료급식소",
-            46 to "가좌노인문화센터경로무료급식소",
-            47 to "연희노인문화센터경로무료급식소",
-            48 to "검단노인복지관 경로식당"
-    )
+
     val array2 = arrayOf(MapPoint.mapPointWithGeoCoord(37.4498013	,126.739349),
         MapPoint.mapPointWithGeoCoord(37.4635492	,126.725459),
         MapPoint.mapPointWithGeoCoord(37.4478231	,126.737056),
@@ -148,6 +104,19 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
             7 to "대구쪽방상담소",
             8 to "인천내일을여는집 쪽방상담소",
             9 to "대전광역시쪽방상담소")
+
+    val jobpoint = arrayOf(MapPoint.mapPointWithGeoCoord(37.4687584336674,126.660821349251),
+    MapPoint.mapPointWithGeoCoord(37.4051962463669,126.695946205678),
+    MapPoint.mapPointWithGeoCoord(37.4740806732311,126.621339693079),
+    MapPoint.mapPointWithGeoCoord(37.4822857823943,126.646410672519),
+    MapPoint.mapPointWithGeoCoord(37.4634778848565,126.650001282535),
+    MapPoint.mapPointWithGeoCoord(37.409493814977,126.678337878586),
+    MapPoint.mapPointWithGeoCoord(37.4476151057576,126.733068368397),
+    MapPoint.mapPointWithGeoCoord(37.5070683146994,126.721856264828),
+    MapPoint.mapPointWithGeoCoord(37.5374405601649,126.737760072912),
+    MapPoint.mapPointWithGeoCoord(37.4506797747895,126.69928849417),
+    MapPoint.mapPointWithGeoCoord(37.5394836297326,126.734960628885),
+    MapPoint.mapPointWithGeoCoord(37.544316773242,126.676503577483))
 
     override fun onBackPressed() {
         lateinit var toast: Toast
@@ -214,6 +183,9 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
 
         when(item?.itemId){
         R.id.first-> {
+            val intent = intent
+            val personname = intent.getStringExtra("name")
+          //  menuCount("${item.title}",personname)
             val nextIntent = Intent(this,policy::class.java)
             startActivity(nextIntent)
         }
@@ -277,6 +249,7 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
                         val res = response.body()!!
+                        Log.e("ㅌㅌ","$res")
                         val kakaoAdd = res.getAsJsonArray("documents")
                         val add_name = kakaoAdd.get(0)
                         val add = add_name.asJsonObject
@@ -368,6 +341,78 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
             return null
         }
     }
+    class CustomCalloutBalloonAdapter3: CalloutBalloonAdapter {
+        val retrofit: Retrofit = Retrofit.Builder().baseUrl(KakaoApi.instance.base).addConverterFactory(
+            GsonConverterFactory.create()).build()
+        val networkService = retrofit.create(NetworkService::class.java)
+        private val layoutInflater: LayoutInflater = context().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
+        private var mCalloutBalloon: View
+        init {
+            mCalloutBalloon = layoutInflater.inflate(R.layout.custom_callout_balloon, null)
+        }
+        private val mmCalloutBalloon :LinearLayout = mCalloutBalloon.findViewById(R.id.custom_balloon)
+        override fun getCalloutBalloon(poiItem: MapPOIItem): View{
+            val address: Call<JsonObject> = networkService.address(
+                "${KakaoApi.instance.key}",
+                poiItem.mapPoint.mapPointGeoCoord.longitude,
+                poiItem.mapPoint.mapPointGeoCoord.latitude
+            )
+            address.enqueue(object : Callback<JsonObject> {
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+
+                    if (response.isSuccessful) {
+                        val res = response.body()!!
+                        val kakaoAdd = res.getAsJsonArray("documents")
+                        Log.e("test1",kakaoAdd.toString())
+                        val road_add = kakaoAdd.asJsonArray.get(0)
+                        var road = road_add.asJsonObject.get("address_name")
+                        if (road == null) {
+                            road = road_add.asJsonObject.get("address")
+                            val test2 = JSONObject(road.toString()).getString("address_name")
+                            (mmCalloutBalloon.findViewById(R.id.testView)as TextView).text = "주소: $test2"
+
+                        } else {
+                            val test = JSONObject(road.toString()).getString("address_name")
+                            (mmCalloutBalloon.findViewById(R.id.testView)as TextView).text = "주소: $test"
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    Log.e("sign up fail", t.toString())
+                }
+            })
+
+            Thread.sleep(200)
+            (mmCalloutBalloon.findViewById(R.id.home_title) as TextView).text = poiItem.itemName
+            (mmCalloutBalloon.findViewById(R.id.desc) as TextView).text = "전화번호: 정보가 없습니다"
+
+            return mmCalloutBalloon
+        }
+        override fun getPressedCalloutBalloon(poiItem: MapPOIItem): View? {
+            return null
+        }
+    }
+    var token: String? = null
+    fun menuCount(menuName: String, Name: String){
+        val networkService : NetworkService by lazy {
+            ApplicationController.instance.networkService
+        }
+        val obj = JSONObject()
+        obj.put("name" ,Name)
+        obj.put("token", token)
+        obj.put("function",menuName)
+        val json = obj.toString()
+        val gsonObject = JsonParser().parse(json) as JsonObject
+        val menucount: Call<JsonObject> = networkService.menuCount(gsonObject)
+        menucount.enqueue(object :Callback<JsonObject>{
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+            }
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+            }
+        })
+    }
+
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(activity_fragmap)
@@ -383,6 +428,17 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
             requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),100)
             requestPermissions(arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),100)
         }
+        val intent = intent
+        var personname = intent.getStringExtra("name")
+        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener(OnCompleteListener{
+                task->
+            if (!task.isSuccessful){
+                Log.w( "getInstanceId failed", task.exception)
+                return@OnCompleteListener
+            }
+            token = task.result?.token
+            Log.e("토큰", token)
+        })
         val lm: LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         val location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
         var latitude = location.latitude
@@ -400,14 +456,18 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
             mapView.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeadingWithoutMapMoving
         }
         class ItemSelectedListener : BottomNavigationView.OnNavigationItemSelectedListener {
+            @SuppressLint("ResourceType")
             override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
                 when (menuItem.itemId) {
                     R.id.navigation_freefood -> {
+                        personname = "fafa"
+                        menuCount("${menuItem.title}",personname)
                         mapView.setCalloutBalloonAdapter(CustomCalloutBalloonAdapter2())
                         mapView.removeAllPOIItems()
-                        for (i in 0..48) {
+                        for (i in 0..array2.size-1) {
                             var marker = MapPOIItem()
-                            marker.itemName = map3[i]
+                    //        marker.itemName = map3[i]
+                            marker.itemName = resources.getStringArray(R.array.freefoodname)[i].toString()
                             marker.mapPoint = array2[i]
                             marker.tag = i
                             marker.showAnimationType = MapPOIItem.ShowAnimationType.SpringFromGround
@@ -418,37 +478,35 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
                         }
                     }
                     R.id.navigation_dashboard -> {
+                        personname = "fasd"
+                        menuCount("${menuItem.title}",personname)
                         mapView.removeAllPOIItems()
-                        mapView.setCalloutBalloonAdapter(CustomCalloutBalloonAdapter())
-                        val retrofit: Retrofit = Retrofit.Builder().baseUrl(ApplicationController.instance.baseURL).addConverterFactory(
-                            GsonConverterFactory.create()).build()
-                        val networkService = retrofit.create(NetworkService::class.java)
-                        val Coffee: Call<JsonArray> = networkService.coffee(
-                            location.latitude.toString(),
-                            location.longitude.toString()
-                        )
-                        Coffee.enqueue(object : Callback<JsonArray>{
-                            override fun onResponse(
-                                call: Call<JsonArray>,
-                                response: Response<JsonArray>
-                            ) {
-                                Log.e("성공","${response.body()}")
-                            }
-                            override fun onFailure(call: Call<JsonArray>, t: Throwable) {
-                                Log.e("실패",": 실패함")
-                            }
-                        })
+                        mapView.setCalloutBalloonAdapter(CustomCalloutBalloonAdapter3())
+                        for (i in 0..jobpoint.size-1){
+                            var marker = MapPOIItem()
+                            marker.itemName = resources.getStringArray(R.array.jobname)[i].toString()
+                            marker.mapPoint = jobpoint[i]
+                            marker.showAnimationType = MapPOIItem.ShowAnimationType.SpringFromGround
+                            marker.selectedMarkerType = MapPOIItem.MarkerType.RedPin
+                            marker.isShowCalloutBalloonOnTouch = true
+                            marker.isShowDisclosureButtonOnCalloutBalloon = true
+                            mapView.addPOIItem(marker)
+                        }
+
                     }
                     R.id.navigation_notifications -> {
+                        menuCount("${menuItem.title}",personname)
                         mapView.removeAllPOIItems()
                         mapView.setCalloutBalloonAdapter(CustomCalloutBalloonAdapter())
                     }
                     R.id.navigation_home -> {
+                        menuCount("${menuItem.title}",personname)
                         mapView.removeAllPOIItems()
                         mapView.setCalloutBalloonAdapter(CustomCalloutBalloonAdapter())
                         Log.e("ㅅㅁㄴㄻㄴ","$longitude , $latitude")
                     }
                     R.id.navigation_job->{
+                        menuCount("${menuItem.title}",personname)
                         mapView.removeAllPOIItems()
                         mapView.setCalloutBalloonAdapter(CustomCalloutBalloonAdapter())
                         Toast.makeText(this@fragmap,"결과는 반경5Km 이내, 최대 45개까지 표시됩니다.", Toast.LENGTH_LONG).show()
