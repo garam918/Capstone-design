@@ -118,6 +118,12 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
     MapPoint.mapPointWithGeoCoord(37.5394836297326,126.734960628885),
     MapPoint.mapPointWithGeoCoord(37.544316773242,126.676503577483))
 
+    val bokjiPoint = arrayOf(MapPoint.mapPointWithGeoCoord(37.545171523079,126.685770188126),
+    MapPoint.mapPointWithGeoCoord(37.5117768004675,126.666278050191),
+    MapPoint.mapPointWithGeoCoord(37.4617528000859,126.640659477075),
+    MapPoint.mapPointWithGeoCoord(37.459575593541,126.645999172428),
+    MapPoint.mapPointWithGeoCoord(37.5478266028925,126.725849880728))
+
     override fun onBackPressed() {
         lateinit var toast: Toast
         if (System.currentTimeMillis() >= backKeyPressedTime + 1500) {
@@ -500,9 +506,19 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
                         mapView.setCalloutBalloonAdapter(CustomCalloutBalloonAdapter())
                     }
                     R.id.navigation_home -> {
-                        menuCount("${menuItem.title}",personname)
+//                        menuCount("${menuItem.title}",personname)
                         mapView.removeAllPOIItems()
-                        mapView.setCalloutBalloonAdapter(CustomCalloutBalloonAdapter())
+                        mapView.setCalloutBalloonAdapter(CustomCalloutBalloonAdapter3())
+                        for (i in 0..bokjiPoint.size-1){
+                            var marker = MapPOIItem()
+                            marker.itemName = resources.getStringArray(R.array.bokji)[i].toString()
+                            marker.mapPoint = bokjiPoint[i]
+                            marker.showAnimationType = MapPOIItem.ShowAnimationType.SpringFromGround
+                            marker.selectedMarkerType = MapPOIItem.MarkerType.RedPin
+                            marker.isShowCalloutBalloonOnTouch = true
+                            marker.isShowDisclosureButtonOnCalloutBalloon = true
+                            mapView.addPOIItem(marker)
+                        }
                         Log.e("ㅅㅁㄴㄻㄴ","$longitude , $latitude")
                     }
                     R.id.navigation_job->{

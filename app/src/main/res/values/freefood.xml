@@ -68,5 +68,13 @@
 
     </string-array>
 
+    <string-array name="bokji">
+        <item>은혜의 집</item>
+        <item>광명의 집</item>
+        <item>다사랑의 집</item>
+        <item>한무리Holylife</item>
+        <item>내일을 여는 자활쉼터</item>
+    </string-array>
+
 
 </resources>
