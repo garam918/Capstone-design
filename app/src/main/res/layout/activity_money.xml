@@ -9,14 +9,10 @@
     <TextView
         android:id="@+id/moneyText"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="323dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="-2dp"
-        android:layout_marginTop="-1dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="161dp"
         android:text="귀향여비 설명~"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/moneyrecycler"
@@ -26,16 +22,88 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/moneyrecycler"
-        android:layout_width="385dp"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="195dp"
         android:layout_below="@+id/moneyText"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/moneyText">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/moneyText" />
+        app:layout_constraintTop_toBottomOf="@+id/moneyrecycler">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/gyeyang"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="계양구청"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/namdong"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="남동구청"
+                android:textSize="24sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/michuhol"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="미추홀구청"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/seogu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:text="서구청"
+                android:textSize="24sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/bupyeong"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="부평구청"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/junggoo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:text="중구청"
+                android:textSize="24sp" />
+        </TableRow>
+
+    </TableLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

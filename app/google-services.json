@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "22376822019",
+    "firebase_url": "https://pushmessage-37f1f.firebaseio.com",
+    "project_id": "pushmessage-37f1f",
+    "storage_bucket": "pushmessage-37f1f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22376822019:android:391f8f41a8c33ed062e536",
+        "android_client_info": {
+          "package_name": "com.example.garam.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22376822019-1d41dnl23jl3fvafo8edkk5c0jddgqrh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.garam.myapplication",
+            "certificate_hash": "91807a8d9baaeb582541132ea87b7d6c0ac2f5b3"
+          }
+        },
+        {
+          "client_id": "22376822019-1m9kcdpmbuf14hsmcaeq1qs53eht6tad.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvENcaMuwmggkCiykrqMwEZckfI5CzAPw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22376822019-1m9kcdpmbuf14hsmcaeq1qs53eht6tad.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

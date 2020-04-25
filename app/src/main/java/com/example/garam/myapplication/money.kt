@@ -4,11 +4,13 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class money : AppCompatActivity() {
+class money : AppCompatActivity(), View.OnClickListener {
 
     var lists = arrayListOf<moneyList>()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,16 +27,51 @@ class money : AppCompatActivity() {
 
         val test = MoneyRecyclerAdapter(lists,this){
             moneyList ->
-
+            val url = "https://map.kakao.com/link/to/${moneyList.name}"
+            val nextIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(nextIntent)
         }
         recycler.adapter = test
         test.notifyDataSetChanged()
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.setHasFixedSize(true)
-      //  val url = "https://map.kakao.com/link/to/${p1?.itemName},${p1?.mapPoint?.mapPointGeoCoord?.latitude}, ${p1?.mapPoint?.mapPointGeoCoord?.longitude}"
-      //  val nextIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-
         val moneyText = findViewById<TextView>(R.id.moneyText)
         moneyText.text = getString(R.string.money)
+        val text = findViewById<TextView>(R.id.gyeyang)
+        val text2 = findViewById<TextView>(R.id.namdong)
+        val text3 = findViewById<TextView>(R.id.michuhol)
+        val text4 = findViewById<TextView>(R.id.bupyeong)
+        val text5 = findViewById<TextView>(R.id.junggoo)
+        val text6 = findViewById<TextView>(R.id.seogu)
+        text.setOnClickListener(this)
+        text2.setOnClickListener(this)
+        text3.setOnClickListener(this)
+        text4.setOnClickListener(this)
+        text5.setOnClickListener(this)
+        text6.setOnClickListener(this)
+
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id){
+            R.id.gyeyang -> {
+                Toast.makeText(this,"test",Toast.LENGTH_LONG).show()
+            }
+            R.id.namdong -> {
+                Toast.makeText(this,"test2",Toast.LENGTH_LONG).show()
+            }
+            R.id.michuhol -> {
+
+            }
+            R.id.bupyeong -> {
+
+            }
+            R.id.junggoo -> {
+
+            }
+            R.id.seogu -> {
+
+            }
+        }
     }
 }
