@@ -75,6 +75,8 @@ class LoginActivity : AppCompatActivity() {
         val userLogin = findViewById<Button>(R.id.userLogin)
         val password = findViewById<EditText>(R.id.password)
         val login = findViewById<Button>(R.id.login)
+        login.isEnabled = false
+
         val make = findViewById<Button>(R.id.makeRegi)
         val array = arrayOf("사용자","관리자")
         make.setOnClickListener {
@@ -105,7 +107,6 @@ class LoginActivity : AppCompatActivity() {
             if (gsonObject != null) {
             loginTry.enqueue(object : Callback<JsonObject>{
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                    Log.e("로그인", response.body()?.toString())
                         val place = response.body()!!.get("foodPlace").asString
                         val nextIntent = Intent(this@LoginActivity, Volunteer::class.java)
                         nextIntent.putExtra("info","$place")

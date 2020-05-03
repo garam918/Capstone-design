@@ -1,10 +1,14 @@
 package com.example.garam.myapplication
 
 import android.os.Bundle
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
+import androidx.core.widget.doBeforeTextChanged
+import androidx.core.widget.doOnTextChanged
 import com.example.garam.myapplication.network.ApplicationController
 import com.example.garam.myapplication.network.NetworkService
 import com.google.gson.JsonObject
@@ -28,6 +32,10 @@ class Food : AppCompatActivity() {
         val obj = JSONObject()
         val firstfood = findViewById<EditText>(R.id.foodedit)
         val foodButton = findViewById<Button>(R.id.foodButton)
+        foodButton.isEnabled = false
+        firstfood.doBeforeTextChanged { text, start, count, after ->
+            foodButton.isEnabled = true
+        }
         foodButton.setOnClickListener {
             obj.put("name",info)
             val foodcount = Integer.parseInt(firstfood.text.toString())

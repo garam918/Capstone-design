@@ -54,27 +54,15 @@ class Volunteer : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_volunteer)
         val intent = intent
-        info = intent.getStringExtra("info")
-     //   info = "만수종합사회복지관"
+     //   info = intent.getStringExtra("info")
+        info = "만수종합사회복지관"
         val facility = findViewById<TextView>(R.id.facility)
         facility.text = "시설 정보 : $info"
         Log.e("시설","$info")
         val button = findViewById<Button>(R.id.button)
         val food = findViewById<Button>(R.id.food)
+        val foodamount = findViewById<TextView>(R.id.foodamount)
 
-        val testButton = findViewById<Button>(R.id.testButton)
-        testButton.setOnClickListener {
-            val test:Call<JsonObject> = networkService.test()
-            test.enqueue(object :Callback<JsonObject>{
-                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-
-                }
-
-                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                    Log.e("테스트","${response.body()}")
-                }
-            })
-        }
         button.setOnClickListener {
             requestPermissions(arrayOf(Manifest.permission.CAMERA),100)
             val intentIntegrator = IntentIntegrator(this)

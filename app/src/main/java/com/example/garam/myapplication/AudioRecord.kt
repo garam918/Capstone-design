@@ -2,7 +2,6 @@ package com.example.garam.myapplication
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.media.MediaRecorder
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -26,8 +25,10 @@ class AudioRecord : AppCompatActivity() {
         val okbutton = findViewById<Button>(R.id.button5)
         val path = cacheDir.path + "/" + "recorder.wav"
         val waveRecorder = WaveRecorder(path)
+        okbutton.isEnabled = false
         recordbutton.setOnClickListener {
            Toast.makeText(this,"녹음을 시작합니다",Toast.LENGTH_SHORT).show()
+            okbutton.isEnabled = true
            // waveRecorder.waveConfig.sampleRate = 44100
            // waveRecorder.waveConfig.channels = AudioFormat.CHANNEL_IN_STEREO
            // waveRecorder.waveConfig.audioEncoding = AudioFormat.ENCODING_PCM_8BIT

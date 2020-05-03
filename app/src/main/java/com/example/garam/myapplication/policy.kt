@@ -63,11 +63,14 @@ class policy : AppCompatActivity() {
                             "3. URL 주소 ",
                             "${elem.getElementsByTagName("svcInfoUrl").item(0).textContent}"
                         )
-                        policyList = elem.getElementsByTagName("svcNm").item(0).textContent
+                        Log.e(
+                            "4. 지원 내용 ",
+                            "${elem.getElementsByTagName("sportFr").item(0).textContent}"
+                        )
+                        policyList = elem.getElementsByTagName("sportFr").item(0).textContent
                         polName = elem.getElementsByTagName("jrsdDptAllNm").item(0).textContent
                         polUrl = elem.getElementsByTagName("svcInfoUrl").item(0).textContent
                         lists.add(polList(policyList, polName, polUrl))
-                        Log.e("polList", lists.toString())
 
                     }
                 }
@@ -95,19 +98,23 @@ class policy : AppCompatActivity() {
         mWebsetting.builtInZoomControls = true
         mWebsetting.layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN
         mWebsetting.cacheMode = WebSettings.LOAD_NO_CACHE
-      recycler = findViewById<RecyclerView>(R.id.recyclerView)
-        Thread.sleep(6000)
-        val test = StdRecyclerAdapter(lists,this){
-            polList ->
-            recycler.visibility = View.INVISIBLE
-            webView.visibility = View.VISIBLE
-            webView.loadUrl(polList.url)
-            Toast.makeText(this,"${polList.url}",Toast.LENGTH_LONG).show()
+        recycler = findViewById<RecyclerView>(R.id.recyclerView)
+
+        val refresh = findViewById<Button>(R.id.refresh)
+        refresh.setOnClickListener {
+            val test = StdRecyclerAdapter(lists,this){
+                    polList ->
+                recycler.visibility = View.INVISIBLE
+                webView.visibility = View.VISIBLE
+                webView.loadUrl(polList.url)
+                Toast.makeText(this,"${polList.url}",Toast.LENGTH_LONG).show()
+            }
+            recycler.adapter = test
+            test.notifyDataSetChanged()
+            recycler.layoutManager = LinearLayoutManager(this)
+            recycler.setHasFixedSize(true)
+
         }
-        recycler.adapter = test
-        test.notifyDataSetChanged()
-        recycler.layoutManager = LinearLayoutManager(this)
-        recycler.setHasFixedSize(true)
 
         }
       override fun onBackPressed() {

@@ -11,12 +11,6 @@ import retrofit2.http.*
 
 interface NetworkService{
 
-     @POST("/create/")
-     fun postTest(
-         @Header("Content-Type") content_type: String,
-         @Body body: JsonObject
-     ): Call<PostTest>
-
     @POST("/count")
     fun menuCount(
        @Body body : JsonObject
@@ -33,24 +27,15 @@ interface NetworkService{
     ): Call<JsonObject>
 
     @Multipart
-    @POST("/freefood/foodcount")
-    fun imageTest(
-        @Part imagefile : MultipartBody.Part?,
-        @Part("imgFile") imgFile : RequestBody
-    ): Call<ResponseBody>
-
-    @Multipart
     @POST("/login/FVlogin")
     fun imageLogin(
         @Part imagefile : MultipartBody.Part?
-       // @Part imgFile : RequestBody
     ): Call<JsonObject>
 
     @Multipart
     @POST("/login/FVlogin")
     fun audioLogin(
         @Part audiofile : MultipartBody.Part?
-//        @Part("voice") audio : RequestBody
     ): Call<JsonObject>
 
 
@@ -58,20 +43,8 @@ interface NetworkService{
     @POST("/freefood/foodcount")
     fun imageTest2(
         @Part imagefile : MultipartBody.Part?,
- //       @Part("imgFile") imgFile : RequestBody,
         @Part ("name") json: RequestBody
     ): Call<String>
-
-    @Multipart
-    @POST("/signup")
-    fun imageTest3(
-        @Part imagefile : MultipartBody.Part?,
-        @Part imagefile2 : MultipartBody.Part?,
-        @Part("imgFile") imgFile : RequestBody,
-        @Part("imgFile") imgFile2 : RequestBody,
-        @Part ("json") json: RequestBody
-    ): Call<ResponseBody>
-
 
     @Multipart
     @POST("/signup")
@@ -122,8 +95,4 @@ interface NetworkService{
         @Body loginInfo : JsonObject
     ) : Call<JsonObject>
 
-    @POST("/sockettest")
-    fun test(
-
-    ) : Call<JsonObject>
 }

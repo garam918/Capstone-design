@@ -24,10 +24,8 @@ import com.example.garam.myapplication.network.NetworkService
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.iid.FirebaseInstanceId
-import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import com.google.protobuf.StringValue
 import net.daum.mf.map.api.CalloutBalloonAdapter
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
@@ -94,16 +92,11 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
         MapPoint.mapPointWithGeoCoord(37.4955378	,126.6912229),
         MapPoint.mapPointWithGeoCoord(37.5462409	,126.6721504),
         MapPoint.mapPointWithGeoCoord(37.6020407	,126.6614441))
-    val sangdam: Map<Int,String> = mapOf(0 to "창신동쪽방상담센터",
-            1 to "남대문쪽방상담소",
-            2 to "돈의동쪽방상담소",
-            3 to "서울역쪽방상담소",
-            4 to "영등포쪽방상담소",
-            5 to "동구쪽방상담소",
-            6 to "부산진구쪽방상담소",
-            7 to "대구쪽방상담소",
-            8 to "인천내일을여는집 쪽방상담소",
-            9 to "대전광역시쪽방상담소")
+    val sangdam: Map<Int,String> = mapOf(0  to "인천내일을여는집 쪽방상담소",
+        1 to "연수구중독관리통합지원센터")
+
+    val sangdam2 = arrayOf(MapPoint.mapPointWithGeoCoord(37.5478266028925,126.725849880728),
+        MapPoint.mapPointWithGeoCoord(37.4121365721784,126.665985810103))
 
     val jobpoint = arrayOf(MapPoint.mapPointWithGeoCoord(37.4687584336674,126.660821349251),
     MapPoint.mapPointWithGeoCoord(37.4051962463669,126.695946205678),
@@ -124,6 +117,11 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
     MapPoint.mapPointWithGeoCoord(37.459575593541,126.645999172428),
     MapPoint.mapPointWithGeoCoord(37.5478266028925,126.725849880728))
 
+    val sangdamPoint = arrayOf(MapPoint.mapPointWithGeoCoord(37.53515442101851,126.72290818723897),
+        MapPoint.mapPointWithGeoCoord(37.46470039798029,126.71121597725626),
+        MapPoint.mapPointWithGeoCoord(37.4830613330657,126.617699409983),
+        MapPoint.mapPointWithGeoCoord(37.5148743484054,126.70453806158)
+    )
     override fun onBackPressed() {
         lateinit var toast: Toast
         if (System.currentTimeMillis() >= backKeyPressedTime + 1500) {
@@ -226,12 +224,10 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
     }
     companion object{
         private var instance: fragmap? = null
-
         fun context(): Context{
             return instance!!.applicationContext
         }
     }
-
     class CustomCalloutBalloonAdapter: CalloutBalloonAdapter {
 
         private val layoutInflater: LayoutInflater = context().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -310,10 +306,10 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
                         val res = response.body()!!
                         val kakaoAdd = res.getAsJsonArray("documents")
                         Log.e("test1",kakaoAdd.toString())
-                        val road_add = kakaoAdd.asJsonArray.get(0)
-                        var road = road_add.asJsonObject.get("address_name")
+                        val roadadd = kakaoAdd.asJsonArray.get(0)
+                        var road = roadadd.asJsonObject.get("address_name")
                         if (road == null) {
-                            road = road_add.asJsonObject.get("address")
+                            road = roadadd.asJsonObject.get("address")
                             val test2 = JSONObject(road.toString()).getString("address_name")
                             (mmCalloutBalloon.findViewById(R.id.testView)as TextView).text = "주소: $test2"
 
@@ -466,7 +462,6 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
             override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
                 when (menuItem.itemId) {
                     R.id.navigation_freefood -> {
-                        personname = "fafa"
                         menuCount("${menuItem.title}",personname)
                         mapView.setCalloutBalloonAdapter(CustomCalloutBalloonAdapter2())
                         mapView.removeAllPOIItems()
@@ -484,7 +479,6 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
                         }
                     }
                     R.id.navigation_dashboard -> {
-                        personname = "fasd"
                         menuCount("${menuItem.title}",personname)
                         mapView.removeAllPOIItems()
                         mapView.setCalloutBalloonAdapter(CustomCalloutBalloonAdapter3())
@@ -501,12 +495,33 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
 
                     }
                     R.id.navigation_notifications -> {
-                        menuCount("${menuItem.title}",personname)
+             //           menuCount("${menuItem.title}",personname)
                         mapView.removeAllPOIItems()
                         mapView.setCalloutBalloonAdapter(CustomCalloutBalloonAdapter())
+                        for (i in 0.. sangdamPoint.size-1 ){
+                            var marker = MapPOIItem()
+                            marker.itemName = resources.getStringArray(R.array.sangdam)[i].toString()
+                            marker.mapPoint = sangdamPoint[i]
+                            marker.showAnimationType = MapPOIItem.ShowAnimationType.SpringFromGround
+                            marker.selectedMarkerType = MapPOIItem.MarkerType.RedPin
+                            marker.isShowCalloutBalloonOnTouch = true
+                            marker.isShowDisclosureButtonOnCalloutBalloon = true
+                            mapView.addPOIItem(marker)
+                        }
+                        mapView.setCalloutBalloonAdapter(CustomCalloutBalloonAdapter3())
+                        for (i in 0..1){
+                            var marker = MapPOIItem()
+                            marker.itemName = sangdam[i]
+                            marker.mapPoint = sangdam2[i]
+                            marker.showAnimationType = MapPOIItem.ShowAnimationType.SpringFromGround
+                            marker.selectedMarkerType = MapPOIItem.MarkerType.RedPin
+                            marker.isShowCalloutBalloonOnTouch = true
+                            marker.isShowDisclosureButtonOnCalloutBalloon = true
+                            mapView.addPOIItem(marker)
+                        }
                     }
                     R.id.navigation_home -> {
-//                        menuCount("${menuItem.title}",personname)
+                        menuCount("${menuItem.title}",personname)
                         mapView.removeAllPOIItems()
                         mapView.setCalloutBalloonAdapter(CustomCalloutBalloonAdapter3())
                         for (i in 0..bokjiPoint.size-1){
