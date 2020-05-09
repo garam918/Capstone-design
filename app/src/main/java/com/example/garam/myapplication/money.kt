@@ -1,9 +1,11 @@
 package com.example.garam.myapplication
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -12,66 +14,122 @@ import androidx.recyclerview.widget.RecyclerView
 
 class money : AppCompatActivity(), View.OnClickListener {
 
-    var lists = arrayListOf<moneyList>()
+    lateinit var geyphone: String
+    lateinit var namphone: String
+    lateinit var miphone: String
+    lateinit var boophone: String
+    lateinit var seophone: String
+    lateinit var jungphone: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_money)
-        lists.add(moneyList("계양구청 : ","인천 계양구 계산새로 88"))
-        lists.add(moneyList("남동구청 : ","인천 남동구 소래로 633"))
-        lists.add(moneyList("미추홀구청 : ","인천 미추홀구 독정이로 95"))
-        lists.add(moneyList("부평구청 : ","인천 부평구 부평대로 168"))
-        lists.add(moneyList("서구청 : ","인천 서구 서곶로 299"))
-        lists.add(moneyList("중구청 : ","인천 중구 신포로27번길 80"))
-
-        val recycler = findViewById<RecyclerView>(R.id.moneyrecycler)
-
-        val test = MoneyRecyclerAdapter(lists,this){
-            moneyList ->
-            val url = "https://map.kakao.com/link/to/${moneyList.name}"
-            val nextIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(nextIntent)
-        }
-        recycler.adapter = test
-        test.notifyDataSetChanged()
-        recycler.layoutManager = LinearLayoutManager(this)
-        recycler.setHasFixedSize(true)
         val moneyText = findViewById<TextView>(R.id.moneyText)
         moneyText.text = getString(R.string.money)
-        val text = findViewById<TextView>(R.id.gyeyang)
-        val text2 = findViewById<TextView>(R.id.namdong)
-        val text3 = findViewById<TextView>(R.id.michuhol)
-        val text4 = findViewById<TextView>(R.id.bupyeong)
-        val text5 = findViewById<TextView>(R.id.junggoo)
-        val text6 = findViewById<TextView>(R.id.seogu)
-        text.setOnClickListener(this)
-        text2.setOnClickListener(this)
-        text3.setOnClickListener(this)
-        text4.setOnClickListener(this)
-        text5.setOnClickListener(this)
-        text6.setOnClickListener(this)
 
+        val text10 = findViewById<TextView>(R.id.geyAdd)
+        val text11 = findViewById<TextView>(R.id.namAdd)
+        val text12 = findViewById<TextView>(R.id.miAdd)
+        val text13 = findViewById<TextView>(R.id.booAdd)
+        val text14 = findViewById<TextView>(R.id.seoAdd)
+        val text15 = findViewById<TextView>(R.id.jungAdd)
+
+        text10.setOnClickListener(this)
+        text11.setOnClickListener(this)
+        text12.setOnClickListener(this)
+        text13.setOnClickListener(this)
+        text14.setOnClickListener(this)
+        text15.setOnClickListener(this)
+
+        val text20 = findViewById<TextView>(R.id.phoneGey)
+        val text21 = findViewById<TextView>(R.id.phoneNam)
+        val text22 = findViewById<TextView>(R.id.phoneBoo)
+        val text23 = findViewById<TextView>(R.id.phoneSeo)
+        val text24 = findViewById<TextView>(R.id.phoneMi)
+        val text25 =findViewById<TextView>(R.id.phoneJung)
+
+
+        text20.setOnClickListener(this)
+        text21.setOnClickListener(this)
+        text22.setOnClickListener(this)
+        text23.setOnClickListener(this)
+        text24.setOnClickListener(this)
+        text25.setOnClickListener(this)
+
+
+        geyphone = "tel:" + text20.text.toString()
+        namphone = "tel:" + text21.text.toString()
+        boophone = "tel:" + text22.text.toString()
+        seophone = "tel:" + text23.text.toString()
+        miphone = "tel:" + text24.text.toString()
+        jungphone = "tel:" + text25.text.toString()
     }
 
+    @SuppressLint("ResourceType")
     override fun onClick(v: View?) {
         when (v?.id){
-            R.id.gyeyang -> {
-                Toast.makeText(this,"test",Toast.LENGTH_LONG).show()
-            }
-            R.id.namdong -> {
-                Toast.makeText(this,"test2",Toast.LENGTH_LONG).show()
-            }
-            R.id.michuhol -> {
 
+            R.id.geyAdd -> {
+                val url = "https://map.kakao.com/link/to/계양구청,37.5375028862693,126.737709165273"
+                val nextIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(nextIntent)
             }
-            R.id.bupyeong -> {
+            R.id.namAdd -> {
+                val url = "https://map.kakao.com/link/to/남동구청,37.447348790365,126.731487739738"
+                val nextIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(nextIntent)
+            }
+            R.id.miAdd -> {
+                val url = "https://map.kakao.com/link/to/미추홀구청,37.4635932866927,126.650573941082"
+                val nextIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(nextIntent)
+            }
+            R.id.booAdd -> {
+                val url = "https://map.kakao.com/link/to/부평구청,37.5070416849512,126.721873215514"
+                val nextIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(nextIntent)
+            }
+            R.id.seoAdd -> {
+                val url = "https://map.kakao.com/link/to/서구청,37.5443029960023,126.676440722255"
+                val nextIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(nextIntent)
+            }
+            R.id.jungAdd -> {
+                val url = "https://map.kakao.com/link/to/중구청,37.4736641342665,126.621704004425"
+                val nextIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(nextIntent)
+            }
 
+            R.id.phoneGey -> {
+                val uri = Uri.parse(geyphone)
+                val intent = Intent(Intent.ACTION_DIAL,uri)
+                startActivity(intent)
             }
-            R.id.junggoo -> {
+            R.id.phoneBoo -> {
+                val uri = Uri.parse(boophone)
+                val intent = Intent(Intent.ACTION_DIAL,uri)
+                startActivity(intent)
+            }
+            R.id.phoneNam -> {
+                val uri = Uri.parse(namphone)
+                val intent = Intent(Intent.ACTION_DIAL,uri)
+                startActivity(intent)
+            }
+            R.id.phoneMi -> {
+                val uri = Uri.parse(miphone)
+                val intent = Intent(Intent.ACTION_DIAL,uri)
+                startActivity(intent)
+            }
+            R.id.phoneSeo -> {
+                val uri = Uri.parse(seophone)
+                val intent = Intent(Intent.ACTION_DIAL,uri)
+                startActivity(intent)
+            }
+            R.id.phoneJung -> {
+                val uri = Uri.parse(jungphone)
+                val intent = Intent(Intent.ACTION_DIAL,uri)
+                startActivity(intent)
+            }
 
-            }
-            R.id.seogu -> {
-
-            }
         }
     }
 }

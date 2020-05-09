@@ -102,18 +102,21 @@ class policy : AppCompatActivity() {
 
         val refresh = findViewById<Button>(R.id.refresh)
         refresh.setOnClickListener {
-            val test = StdRecyclerAdapter(lists,this){
-                    polList ->
-                recycler.visibility = View.INVISIBLE
-                webView.visibility = View.VISIBLE
-                webView.loadUrl(polList.url)
-                Toast.makeText(this,"${polList.url}",Toast.LENGTH_LONG).show()
-            }
-            recycler.adapter = test
-            test.notifyDataSetChanged()
-            recycler.layoutManager = LinearLayoutManager(this)
-            recycler.setHasFixedSize(true)
+            if (!thread.isAlive) {
 
+                val test = StdRecyclerAdapter(lists, this) { polList ->
+                    recycler.visibility = View.INVISIBLE
+                    webView.visibility = View.VISIBLE
+                    webView.loadUrl(polList.url)
+                    Toast.makeText(this, "${polList.url}", Toast.LENGTH_LONG).show()
+                }
+                recycler.adapter = test
+                test.notifyDataSetChanged()
+                recycler.layoutManager = LinearLayoutManager(this)
+                recycler.setHasFixedSize(true)
+            } else {
+                Toast.makeText(this, "잠시 뒤에 다시 눌러주세요",Toast.LENGTH_LONG).show()
+            }
         }
 
         }

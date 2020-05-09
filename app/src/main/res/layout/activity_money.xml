@@ -9,101 +9,358 @@
     <TextView
         android:id="@+id/moneyText"
         android:layout_width="0dp"
-        android:layout_height="323dp"
+        android:layout_height="250dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:text="귀향여비 설명~"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/moneyrecycler"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/moneyrecycler"
-        android:layout_width="0dp"
-        android:layout_height="195dp"
-        android:layout_below="@+id/moneyText"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/moneyText">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toTopOf="@id/textView13" />
 
     <TableLayout
+        android:id="@+id/tableLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:stretchColumns="*"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/moneyrecycler">
+        app:layout_constraintTop_toBottomOf="@id/textView14">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#929E9B9B"
+                    android:gravity="center"
+                    android:text="지원 장소"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#929E9B9B"
+                    android:gravity="center"
+                    android:text="담당 부서"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#929E9B9B"
+                    android:gravity="center"
+                    android:text="주소"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="#929E9B9B"
+                    android:gravity="center"
+                    android:text="전화번호"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/gyeyang"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/border"
+                android:gravity="center"
                 android:text="계양구청"
-                android:textSize="24sp" />
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border"
+                android:text="복지정책과"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/geyAdd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border"
+                android:text="인천 계양구 계산새로 88"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/phoneGey"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border"
+                android:text="032-450-5360"
+                android:textSize="14sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/namdong"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/border"
+                android:gravity="center"
                 android:text="남동구청"
-                android:textSize="24sp" />
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/border"
+                android:text="사회보장과"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/namAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/border"
+                android:text="인천 남동구 소래로 633"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/phoneNam"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/border"
+                android:text="032-453-2514"
+                android:textSize="14sp" />
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/michuhol"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/border"
+                android:gravity="center"
                 android:text="미추홀구청"
-                android:textSize="24sp" />
+                android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/seogu"
-                android:layout_width="match_parent"
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:text="서구청"
-                android:textSize="24sp" />
+                android:background="@drawable/border"
+                android:text="복지정책팀"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/miAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/border"
+                android:text="인천 미추홀구 독정이로 95"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/phoneMi"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/border"
+                android:text="032-880-4264"
+                android:textSize="14sp" />
+
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/bupyeong"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/border"
+                android:gravity="center"
                 android:text="부평구청"
-                android:textSize="24sp" />
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/border"
+                android:text="복지정책과"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/booAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/border"
+                android:text="인천 부평구 부평대로 168"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/phoneBoo"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/border"
+                android:text="032-509-6450"
+                android:textSize="14sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/seogu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:text="서구청"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/border"
+                android:text="복지청책팀"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/seoAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/border"
+                android:text="인천 서구 서곶로 299"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/phoneSeo"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/border"
+                android:text="032-560-4295"
+                android:textSize="14sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/junggoo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_horizontal"
+                android:background="@drawable/border"
+                android:gravity="center"
                 android:text="중구청"
-                android:textSize="24sp" />
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:text="복지과"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/jungAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:text="인천 중구 신포로27번길 80"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/phoneJung"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:text="032-760-7521"
+                android:textSize="14sp" />
         </TableRow>
 
     </TableLayout>
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="318dp"
+        android:layout_marginBottom="20dp"
+        android:text="귀향여비란?"
+        app:layout_constraintBottom_toTopOf="@+id/moneyText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="314dp"
+        android:layout_marginBottom="20dp"
+        android:text="지원 기관"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/moneyText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
