@@ -9,14 +9,16 @@
     <TextView
         android:id="@+id/moneyText"
         android:layout_width="0dp"
-        android:layout_height="250dp"
+        android:layout_height="150dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:background="@drawable/border"
         android:text="귀향여비 설명~"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/textView13" />
 
@@ -47,7 +49,7 @@
                     android:gravity="center"
                     android:text="지원 장소"
                     android:textAllCaps="false"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
             </TableRow>
 
@@ -62,7 +64,7 @@
                     android:background="#929E9B9B"
                     android:gravity="center"
                     android:text="담당 부서"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
             </TableRow>
 
@@ -77,7 +79,7 @@
                     android:background="#929E9B9B"
                     android:gravity="center"
                     android:text="주소"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
             </TableRow>
 
@@ -93,7 +95,7 @@
                     android:background="#929E9B9B"
                     android:gravity="center"
                     android:text="전화번호"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
             </TableRow>
 
@@ -341,7 +343,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="318dp"
         android:layout_marginBottom="20dp"
         android:text="귀향여비란?"
         app:layout_constraintBottom_toTopOf="@+id/moneyText"
@@ -355,11 +356,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="314dp"
         android:layout_marginBottom="20dp"
         android:text="지원 기관"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/moneyText" />
 

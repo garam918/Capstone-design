@@ -240,8 +240,8 @@ class QrcodeCreate : AppCompatActivity() {
         val iv = findViewById<ImageView>(R.id.qrcode)
         if(requestCode == 40 && resultCode == RESULT_OK){
             performCrop()
-            iv.setImageURI(providerURI)
         } else if (requestCode == 33){
+            iv.setImageURI(providerURI)
 
         }
     }

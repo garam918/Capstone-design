@@ -1,5 +1,6 @@
 package com.example.garam.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextWatcher
 import android.util.Log
@@ -53,7 +54,10 @@ class Food : AppCompatActivity() {
                     finish()
                 }
             })
+            val data = intent
+            data.putExtra("결과","${firstfood.text}")
 
+            setResult(100,data)
         }
     }
 }

@@ -100,9 +100,12 @@ class policy : AppCompatActivity() {
         mWebsetting.cacheMode = WebSettings.LOAD_NO_CACHE
         recycler = findViewById<RecyclerView>(R.id.recyclerView)
 
+        val line = findViewById<LinearLayout>(R.id.linearLayout)
         val refresh = findViewById<Button>(R.id.refresh)
         refresh.setOnClickListener {
+8
             if (!thread.isAlive) {
+                line.visibility = View.INVISIBLE
 
                 val test = StdRecyclerAdapter(lists, this) { polList ->
                     recycler.visibility = View.INVISIBLE
