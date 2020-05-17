@@ -17,6 +17,8 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.garam.myapplication.R.layout.activity_fragmap
 import com.example.garam.myapplication.network.ApplicationController
 import com.example.garam.myapplication.network.KakaoApi
@@ -173,6 +175,7 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
         Toast.makeText(this,"길찾기 페이지로 이동합니다",Toast.LENGTH_LONG).show()
         startActivity(context(),nextIntent,null)
     }
+
     override fun onDraggablePOIItemMoved(p0: MapView?, p1: MapPOIItem?, p2: MapPoint?) {
     }
     override fun onPOIItemSelected(p0: MapView?, p1: MapPOIItem?) {
@@ -189,7 +192,7 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
         R.id.first-> {
             val intent = intent
             val personname = intent.getStringExtra("name")
-          //  menuCount("${item.title}",personname)
+            menuCount("${item.title}",personname)
             val nextIntent = Intent(this,policy::class.java)
             startActivity(nextIntent)
         }
@@ -301,7 +304,6 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
             )
             address.enqueue(object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-
                     if (response.isSuccessful) {
                         val res = response.body()!!
                         val kakaoAdd = res.getAsJsonArray("documents")
@@ -479,23 +481,53 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
                         }
                     }
                     R.id.navigation_dashboard -> {
-                        menuCount("${menuItem.title}",personname)
+
+                       // menuCount("${menuItem.title}",personname)
                         mapView.removeAllPOIItems()
-                        mapView.setCalloutBalloonAdapter(CustomCalloutBalloonAdapter3())
-                        for (i in 0..jobpoint.size-1){
-                            var marker = MapPOIItem()
-                            marker.itemName = resources.getStringArray(R.array.jobname)[i].toString()
-                            marker.mapPoint = jobpoint[i]
-                            marker.showAnimationType = MapPOIItem.ShowAnimationType.SpringFromGround
-                            marker.selectedMarkerType = MapPOIItem.MarkerType.RedPin
-                            marker.isShowCalloutBalloonOnTouch = true
-                            marker.isShowDisclosureButtonOnCalloutBalloon = true
-                            mapView.addPOIItem(marker)
+                        mapView.setCalloutBalloonAdapter(CustomCalloutBalloonAdapter())
+                        Toast.makeText(this@fragmap,"결과는 반경5Km 이내, 최대 45개까지 표시됩니다.", Toast.LENGTH_LONG).show()
+                        val retrofit: Retrofit = Retrofit.Builder().baseUrl(KakaoApi.instance.base).addConverterFactory(
+                            GsonConverterFactory.create()).build()
+                        val networkService = retrofit.create(NetworkService::class.java)
+                        for(i in 1.. 3){
+                            val address: Call<JsonObject> = networkService.keywordjob("${KakaoApi.instance.key}", "병원",
+                                location.longitude,
+                                location.latitude,
+                                5000,
+                                "distance",
+                                i
+                            )
+                            address.enqueue(object : Callback<JsonObject> {
+                                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                                    if (response.isSuccessful) {
+                                        val keyword = response.body()!!
+                                        val jobkey = keyword.get("documents")
+                                        for ( i in 0 .. 14) {
+                                            val jobkeyword = jobkey.asJsonArray.get(i)
+                                            val jobname = jobkeyword.asJsonObject.get("place_name")
+                                            val jobx = jobkeyword.asJsonObject.get("y")
+                                            val joby = jobkeyword.asJsonObject.get("x")
+                                            val marker = MapPOIItem()
+                                            marker.itemName = jobname.asString
+                                            marker.tag = i
+                                            marker.showAnimationType = MapPOIItem.ShowAnimationType.SpringFromGround
+                                            marker.selectedMarkerType = MapPOIItem.MarkerType.RedPin
+                                            marker.isShowCalloutBalloonOnTouch = true
+                                            marker.isShowDisclosureButtonOnCalloutBalloon = true
+                                            marker.mapPoint = MapPoint.mapPointWithGeoCoord(jobx.asDouble,joby.asDouble)
+                                            mapView.addPOIItem(marker)
+                                        }
+                                    }
+                                }
+                                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                                    Log.e("sign up fail", t.toString())
+                                }
+                            })
                         }
 
                     }
                     R.id.navigation_notifications -> {
-             //           menuCount("${menuItem.title}",personname)
+                        menuCount("${menuItem.title}",personname)
                         mapView.removeAllPOIItems()
                         mapView.setCalloutBalloonAdapter(CustomCalloutBalloonAdapter())
                         for (i in 0.. sangdamPoint.size-1 ){
@@ -537,48 +569,21 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
                         Log.e("ㅅㅁㄴㄻㄴ","$longitude , $latitude")
                     }
                     R.id.navigation_job->{
-                        menuCount("${menuItem.title}",personname)
+
+                       // menuCount("${menuItem.title}",personname)
                         mapView.removeAllPOIItems()
-                        mapView.setCalloutBalloonAdapter(CustomCalloutBalloonAdapter())
-                        Toast.makeText(this@fragmap,"결과는 반경5Km 이내, 최대 45개까지 표시됩니다.", Toast.LENGTH_LONG).show()
-                        val retrofit: Retrofit = Retrofit.Builder().baseUrl(KakaoApi.instance.base).addConverterFactory(
-                            GsonConverterFactory.create()).build()
-                        val networkService = retrofit.create(NetworkService::class.java)
-                        for(i in 1.. 3){
-                        val address: Call<JsonObject> = networkService.keywordjob("${KakaoApi.instance.key}", "인력사무소",
-                            location.longitude,
-                            location.latitude,
-                            5000,
-                            "distance",
-                            i
-                        )
-                        address.enqueue(object : Callback<JsonObject> {
-                            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                                if (response.isSuccessful) {
-                                    val keyword = response.body()!!
-                                    val jobkey = keyword.get("documents")
-                                    for ( i in 0 .. 14) {
-                                        val jobkeyword = jobkey.asJsonArray.get(i)
-                                        val jobname = jobkeyword.asJsonObject.get("place_name")
-                                        val jobx = jobkeyword.asJsonObject.get("y")
-                                        val joby = jobkeyword.asJsonObject.get("x")
-                                        val marker = MapPOIItem()
-                                        marker.itemName = jobname.asString
-                                        marker.tag = i
-                                        marker.showAnimationType = MapPOIItem.ShowAnimationType.SpringFromGround
-                                        marker.selectedMarkerType = MapPOIItem.MarkerType.RedPin
-                                        marker.isShowCalloutBalloonOnTouch = true
-                                        marker.isShowDisclosureButtonOnCalloutBalloon = true
-                                        marker.mapPoint = MapPoint.mapPointWithGeoCoord(jobx.asDouble,joby.asDouble)
-                                        mapView.addPOIItem(marker)
-                                    }
-                                }
-                            }
-                            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                                Log.e("sign up fail", t.toString())
-                            }
-                        })
-                    }
+                        mapView.setCalloutBalloonAdapter(CustomCalloutBalloonAdapter3())
+                        for (i in 0..jobpoint.size-1){
+                            var marker = MapPOIItem()
+                            marker.itemName = resources.getStringArray(R.array.jobname)[i].toString()
+                            marker.mapPoint = jobpoint[i]
+                            marker.showAnimationType = MapPOIItem.ShowAnimationType.SpringFromGround
+                            marker.selectedMarkerType = MapPOIItem.MarkerType.RedPin
+                            marker.isShowCalloutBalloonOnTouch = true
+                            marker.isShowDisclosureButtonOnCalloutBalloon = true
+                            mapView.addPOIItem(marker)
+                        }
+
                     }
                 }
                 return true

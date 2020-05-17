@@ -15,7 +15,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/border"
             android:text="지원 내용 : "
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textlist"
@@ -38,7 +39,8 @@
             android:layout_weight="0"
             android:background="@drawable/border"
             android:text="기관 이름 : "
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textName"

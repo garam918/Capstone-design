@@ -95,4 +95,11 @@ interface NetworkService{
         @Body loginInfo : JsonObject
     ) : Call<JsonObject>
 
+    @Multipart
+    @POST("/foodimg")
+    fun fda(
+        @Part ("name") json: RequestBody,
+        @Part imagefile: MultipartBody.Part?
+    ): Call<String>
+
 }

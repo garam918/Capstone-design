@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:background="#929E9B9B"
                     android:gravity="center"
-                    android:text="지원 장소"
+                    android:text="지원 기관"
                     android:textAllCaps="false"
                     android:textSize="15sp"
                     android:textStyle="bold" />
@@ -342,7 +342,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:layout_marginBottom="20dp"
         android:text="귀향여비란?"
         app:layout_constraintBottom_toTopOf="@+id/moneyText"

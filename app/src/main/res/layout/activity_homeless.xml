@@ -14,7 +14,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView16"
+            android:id="@+id/userName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -22,7 +22,7 @@
             android:textSize="30sp" />
 
         <TextView
-            android:id="@+id/textView17"
+            android:id="@+id/userInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -37,18 +37,22 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/imageButton4"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:id="@+id/map"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_room_24px"
             android:text="시설 위치" />
 
         <Button
-            android:id="@+id/imageButton6"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:text="귀향여비"/>
+            android:id="@+id/money"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_attach_money_24px"
+            android:text="귀향여비" />
     </LinearLayout>
 
     <LinearLayout
@@ -58,17 +62,48 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/imageButton7"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:text="정책알림"/>
+            android:id="@+id/info"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_info_24px"
+            android:text="정책알림" />
 
         <Button
-            android:id="@+id/imageButton8"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:id="@+id/id"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_contacts_24px"
             android:text="등록증" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/food"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_restaurant_24px"
+            android:text="무료급식"
+            app:srcCompat="@android:color/background_light" />
+
+        <Button
+            android:id="@+id/weather"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_cloud_queue_24px"
+            android:text="날씨"
+            app:srcCompat="@android:color/background_light" />
     </LinearLayout>
 </LinearLayout>

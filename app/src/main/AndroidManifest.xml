@@ -24,7 +24,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label">
-        <activity android:name=".Homeless"></activity>
+        <activity android:name=".MenuPic"></activity>
+        <activity android:name=".Homeless" />
         <activity
             android:name=".Food"
             android:theme="@style/Theme.AppCompat.Dialog" />

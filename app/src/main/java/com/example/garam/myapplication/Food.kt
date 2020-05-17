@@ -1,15 +1,11 @@
 package com.example.garam.myapplication
 
-import android.content.Intent
 import android.os.Bundle
-import android.text.TextWatcher
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doBeforeTextChanged
-import androidx.core.widget.doOnTextChanged
 import com.example.garam.myapplication.network.ApplicationController
 import com.example.garam.myapplication.network.NetworkService
 import com.google.gson.JsonObject

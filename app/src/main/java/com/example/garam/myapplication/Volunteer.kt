@@ -32,6 +32,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -41,7 +42,7 @@ class Volunteer : AppCompatActivity() {
     }
     private var backKeyPressedTime :Long= 0
     private var providerURI: Uri? = null
-
+    private var mImage2 : MultipartBody.Part? = null
     override fun onBackPressed() {
         lateinit var toast: Toast
         if (System.currentTimeMillis() >= backKeyPressedTime + 1500) {
@@ -67,8 +68,8 @@ class Volunteer : AppCompatActivity() {
         val time = findViewById<TextView>(R.id.current)
         time.text = date_text
         val intent = intent
-     //   info = intent.getStringExtra("info")
-        info = "만수종합사회복지관"
+        info = intent.getStringExtra("info")
+        //info = "만수종합사회복지관"
         val facility = findViewById<TextView>(R.id.facility)
         facility.text = "시설 정보 : $info"
         Log.e("시설","$info")
@@ -127,6 +128,7 @@ class Volunteer : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Scanned:${result.contents}", Toast.LENGTH_LONG).show()
                 try {
+                    val foodamount = findViewById<TextView>(R.id.foodamount)
                     val img = File(result.barcodeImagePath)
                     val bitmap = BitmapFactory.decodeFile(img.absolutePath)
                     val byteArrayOutputSystem = ByteArrayOutputStream()
@@ -147,6 +149,7 @@ class Volunteer : AppCompatActivity() {
                             response: Response<String>
                         ) {
                            Log.e("통신 성공", response.body())
+                            foodamount.text = "현재 밥 양 : ${response.body()}인분 입니다."
                         }
                     })
                 } catch (e: JSONException){
@@ -165,6 +168,33 @@ class Volunteer : AppCompatActivity() {
             performCrop()
         } else if (requestCode == 33){
             foodimg.setImageURI(providerURI)
+            val options = BitmapFactory.Options()
+            val inputStream: InputStream = contentResolver.openInputStream(providerURI)
+            val bitmap = BitmapFactory.decodeStream(inputStream, null, options)
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+            val photoBody2 = RequestBody.create(
+                "image/jpg".toMediaTypeOrNull(),
+                byteArrayOutputStream.toByteArray()
+            )
+            mImage2 = MultipartBody.Part.createFormData(
+                "menu",
+                "menu.jpg",
+                photoBody2
+            )
+            val nameinfo = RequestBody.create("text/plain".toMediaTypeOrNull(),info)
+
+            val postImage : Call<String> = networkService.fda(nameinfo,mImage2)
+            postImage.enqueue(object : Callback<String>{
+                override fun onFailure(call: Call<String>, t: Throwable) {
+
+                }
+
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+
+                }
+            })
+
         }
     }
 

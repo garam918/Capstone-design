@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         }
         val frag = findViewById<Button>(R.id.frag)
         frag.setOnClickListener {
-            val nextIntent = Intent(this, fragmap::class.java)
+            val nextIntent = Intent(this, Homeless::class.java)
             startActivity(nextIntent)
         }
 
