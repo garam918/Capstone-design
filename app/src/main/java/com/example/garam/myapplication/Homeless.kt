@@ -60,7 +60,7 @@ class Homeless : AppCompatActivity() {
             startActivity(nextIntent)
         }
         weather.setOnClickListener{
-            val nextIntent = Intent(this, Homeless::class.java)
+            val nextIntent = Intent(this, Weather::class.java)
             startActivity(nextIntent)
         }
 
