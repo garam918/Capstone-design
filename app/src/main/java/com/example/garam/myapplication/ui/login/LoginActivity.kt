@@ -263,7 +263,7 @@ class LoginActivity : AppCompatActivity() {
                     val gohome = response.body()!!.get("gohome").asString
                     val year = response.body()!!.get("year").asString
                     val face = response.body()!!.get("Faceimg").asString
-                    val nextIntent = Intent (this@LoginActivity,fragmap::class.java)
+                    val nextIntent = Intent (this@LoginActivity,Homeless::class.java)
                     nextIntent.putExtra("name",nname)
                     nextIntent.putExtra("date",date)
                     nextIntent.putExtra("sex",sex)
@@ -309,7 +309,7 @@ class LoginActivity : AppCompatActivity() {
                     val gohome = response.body()!!.get("gohome").asString
                     val year = response.body()!!.get("year").asString
                     val face = response.body()!!.get("Faceimg").asString
-                    val nextIntent = Intent(this@LoginActivity,fragmap::class.java)
+                    val nextIntent = Intent(this@LoginActivity,Homeless::class.java)
                     nextIntent.putExtra("name",nname)
                     nextIntent.putExtra("date",date)
                     nextIntent.putExtra("sex",sex)

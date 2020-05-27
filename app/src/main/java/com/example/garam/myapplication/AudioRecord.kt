@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -23,6 +24,8 @@ class AudioRecord : AppCompatActivity() {
         Toast.makeText(this,"버튼을 누르고 화면에 표시된 글자를 읽어주세요",Toast.LENGTH_LONG).show()
         val recordbutton = findViewById<Button>(R.id.button4)
         val okbutton = findViewById<Button>(R.id.button5)
+        val daebon = findViewById<TextView>(R.id.daebon)
+        daebon.text = "이 많은 별빛이 내린 언덕 위에\n" + "그대만큼 사랑스러운 사람을 본 일이 없다"
         val path = cacheDir.path + "/" + "recorder.wav"
         val waveRecorder = WaveRecorder(path)
         okbutton.isEnabled = false

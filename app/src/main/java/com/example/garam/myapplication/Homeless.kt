@@ -24,8 +24,6 @@ class Homeless : AppCompatActivity() {
         val userName = findViewById<TextView>(R.id.userName)
         val userInfo = findViewById<TextView>(R.id.userInfo)
 
-        userName.text = "이름 : $name"
-        userInfo.text = "나이 : $year 성별 : $sex "
         val map = findViewById<Button>(R.id.map)
         val freemoney = findViewById<Button>(R.id.money)
         val info = findViewById<Button>(R.id.info)

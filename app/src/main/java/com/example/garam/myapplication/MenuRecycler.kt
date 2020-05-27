@@ -40,7 +40,7 @@ class MenuRecycler (
             fun bind(list:menuList){
                 textname.text = list.menuwhich
                 textyang.text = "현재 밥 양은 ${list.menuyang}인분 입니다"
-                Glide.with(context).load("$imgUrl/${list.menuwhich}").error(R.drawable.ic_home_black_24dp).skipMemoryCache(true).diskCacheStrategy(
+                Glide.with(context).load("$imgUrl/${list.menuwhich}.jpg").error(R.drawable.ic_home_black_24dp).skipMemoryCache(true).diskCacheStrategy(
                     DiskCacheStrategy.NONE).into(foodimg)
 
             }

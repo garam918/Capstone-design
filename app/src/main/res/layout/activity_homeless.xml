@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/testimg"
     android:orientation="vertical"
     tools:context=".Homeless">
 
@@ -18,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView"
             android:textSize="30sp" />
 
         <TextView
@@ -26,7 +26,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView"
             android:textSize="30sp" />
     </LinearLayout>
 
@@ -34,23 +33,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:gravity="center_horizontal|center_vertical"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/map"
-            android:layout_width="100dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
+            android:layout_width="125dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="25dp"
+            android:layout_weight="0"
+            android:background="#E6F8B758"
             android:drawableLeft="@drawable/ic_room_24px"
             android:text="시설 위치" />
 
         <Button
             android:id="@+id/money"
-            android:layout_width="100dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_weight="1"
+            android:layout_width="125dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="25dp"
+            android:layout_weight="0"
+            android:background="#E6F8B758"
             android:drawableLeft="@drawable/ic_attach_money_24px"
             android:text="귀향여비" />
     </LinearLayout>
@@ -59,24 +61,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:gravity="center_horizontal"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/info"
-            android:layout_width="100dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
+            android:layout_width="125dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:layout_marginRight="25dp"
+            android:layout_weight="0"
+            android:background="#E6F8B758"
             android:drawableLeft="@drawable/ic_info_24px"
+            android:gravity="center|center_horizontal|center_vertical"
             android:text="정책알림" />
 
         <Button
             android:id="@+id/id"
-            android:layout_width="100dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
+            android:layout_width="125dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:layout_marginLeft="25dp"
+            android:layout_weight="0"
+            android:background="#E6F8B758"
             android:drawableLeft="@drawable/ic_contacts_24px"
+            android:gravity="center|center_horizontal|center_vertical"
             android:text="등록증" />
     </LinearLayout>
 
@@ -84,25 +93,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:gravity="center_horizontal"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/food"
-            android:layout_width="100dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
+            android:layout_width="125dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:layout_marginRight="25dp"
+            android:layout_weight="0"
+            android:background="#E6F8B758"
             android:drawableLeft="@drawable/ic_restaurant_24px"
+            android:gravity="center|center_horizontal|center_vertical"
             android:text="무료급식"
             app:srcCompat="@android:color/background_light" />
 
         <Button
             android:id="@+id/weather"
-            android:layout_width="100dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
+            android:layout_width="125dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:layout_marginLeft="25dp"
+            android:layout_weight="0"
+            android:background="#E6F8B758"
             android:drawableLeft="@drawable/ic_cloud_queue_24px"
+            android:gravity="center|center_horizontal|center_vertical"
             android:text="날씨"
             app:srcCompat="@android:color/background_light" />
     </LinearLayout>

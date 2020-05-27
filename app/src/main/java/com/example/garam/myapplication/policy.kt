@@ -26,7 +26,7 @@ class policy : AppCompatActivity() {
     private fun run(){
         for (k in 1 .. 9) {
             val xml: Document = DocumentBuilderFactory.newInstance().newDocumentBuilder()
-                .parse("http://api.korea.go.kr/openapi/svc/list?lrgAstCd=&mdmAstCd=&smallAstCd=&jrsdOrgCd=&srhQuery=%EB%85%B8%EC%88%99&pageSize=100&format=xml&serviceKey=GQOMc1HbWO7YPxXTvHmKsEcMapeqMjtBbxH8heT31xs9hJgfWWa8Q6y8gLBadFds6ZLL7V9D3ZBJPu9F%2FJE3%2Bg%3D%3D&pageIndex=$k")
+                .parse("http://api.korea.go.kr/openapi/svc/list?lrgAstCd=&mdmAstCd=&smallAstCd=&jrsdOrgCd=&srhQuery=%EB%85%B8%EC%88%99&pageSize=100&format=xml&serviceKey=h0iRn6zHq237rdbo2KUSy3dz2Nmfech6qVvB0bNCefPcU0uQDmzvu34QHkaeJYqVXk17GTbA4cYcC4ayG9EREg%3D%3D&pageIndex=$k")
             xml.documentElement.normalize()
             var policyList: String? = null
             var polName: String? = null
@@ -106,7 +106,6 @@ class policy : AppCompatActivity() {
 8
             if (!thread.isAlive) {
                 line.visibility = View.INVISIBLE
-
                 val test = StdRecyclerAdapter(lists, this) { polList ->
                     recycler.visibility = View.INVISIBLE
                     webView.visibility = View.VISIBLE

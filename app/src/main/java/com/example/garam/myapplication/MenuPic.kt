@@ -21,7 +21,7 @@ class MenuPic : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_pic)
         var lists = arrayListOf<menuList>()
-        var recycler = findViewById<RecyclerView>(R.id.recyclerView)
+        var recycler = findViewById<RecyclerView>(R.id.menuRecycler)
         val refresh2 = findViewById<Button>(R.id.refreshtwo)
 
 
@@ -38,16 +38,18 @@ class MenuPic : AppCompatActivity() {
                 }
             })
         }
-        refresh2.setOnClickListener {
-
-        }
         val test = MenuRecycler(lists, this) { menuList ->
 
         }
-        recycler.adapter = test
-        test.notifyDataSetChanged()
-        recycler.layoutManager = LinearLayoutManager(this)
-        recycler.setHasFixedSize(true)
+
+        refresh2.setOnClickListener {
+            recycler.adapter = test
+            test.notifyDataSetChanged()
+            recycler.layoutManager = LinearLayoutManager(this)
+            recycler.setHasFixedSize(true)
+
+        }
+
 
     }
 }

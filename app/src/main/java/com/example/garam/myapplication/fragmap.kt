@@ -482,7 +482,7 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
                     }
                     R.id.navigation_dashboard -> {
 
-                       // menuCount("${menuItem.title}",personname)
+                        menuCount("${menuItem.title}",personname)
                         mapView.removeAllPOIItems()
                         mapView.setCalloutBalloonAdapter(CustomCalloutBalloonAdapter())
                         Toast.makeText(this@fragmap,"결과는 반경5Km 이내, 최대 45개까지 표시됩니다.", Toast.LENGTH_LONG).show()
@@ -570,7 +570,7 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
                     }
                     R.id.navigation_job->{
 
-                       // menuCount("${menuItem.title}",personname)
+                        menuCount("${menuItem.title}",personname)
                         mapView.removeAllPOIItems()
                         mapView.setCalloutBalloonAdapter(CustomCalloutBalloonAdapter3())
                         for (i in 0..jobpoint.size-1){

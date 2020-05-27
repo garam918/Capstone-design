@@ -6,7 +6,7 @@
         android:width="1dp"
         android:color="#ff888888" />
 
-    <solid android:color="#ffffff" />
+    <solid android:color="#80ffffff" />
 
 
 

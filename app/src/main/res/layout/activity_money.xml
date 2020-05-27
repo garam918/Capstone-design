@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/testimg"
     tools:context=".money">
 
     <TextView
@@ -108,7 +109,7 @@
             <TextView
                 android:id="@+id/gyeyang"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
                 android:gravity="center"
                 android:text="계양구청"
@@ -117,24 +118,27 @@
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
+                android:gravity="center"
                 android:text="복지정책과"
                 android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/geyAdd"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
+                android:gravity="center"
                 android:text="인천 계양구 계산새로 88"
                 android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/phoneGey"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
+                android:gravity="center"
                 android:text="032-450-5360"
                 android:textSize="14sp" />
 
@@ -147,7 +151,7 @@
             <TextView
                 android:id="@+id/namdong"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
                 android:gravity="center"
                 android:text="남동구청"
@@ -156,24 +160,27 @@
             <TextView
                 android:id="@+id/textView15"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
+                android:gravity="center"
                 android:text="사회보장과"
                 android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/namAdd"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
+                android:gravity="center"
                 android:text="인천 남동구 소래로 633"
                 android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/phoneNam"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
+                android:gravity="center"
                 android:text="032-453-2514"
                 android:textSize="14sp" />
 
@@ -186,7 +193,7 @@
             <TextView
                 android:id="@+id/michuhol"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
                 android:gravity="center"
                 android:text="미추홀구청"
@@ -195,24 +202,27 @@
             <TextView
                 android:id="@+id/textView18"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
+                android:gravity="center"
                 android:text="복지정책팀"
                 android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/miAdd"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
+                android:gravity="center"
                 android:text="인천 미추홀구 독정이로 95"
                 android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/phoneMi"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
+                android:gravity="center"
                 android:text="032-880-4264"
                 android:textSize="14sp" />
 
@@ -225,7 +235,7 @@
             <TextView
                 android:id="@+id/bupyeong"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
                 android:gravity="center"
                 android:text="부평구청"
@@ -234,24 +244,27 @@
             <TextView
                 android:id="@+id/textView22"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
+                android:gravity="center"
                 android:text="복지정책과"
                 android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/booAdd"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
+                android:gravity="center"
                 android:text="인천 부평구 부평대로 168"
                 android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/phoneBoo"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
+                android:gravity="center"
                 android:text="032-509-6450"
                 android:textSize="14sp" />
         </TableRow>
@@ -263,7 +276,7 @@
             <TextView
                 android:id="@+id/seogu"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
                 android:gravity="center"
                 android:text="서구청"
@@ -272,24 +285,27 @@
             <TextView
                 android:id="@+id/textView25"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
+                android:gravity="center"
                 android:text="복지청책팀"
                 android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/seoAdd"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
+                android:gravity="center"
                 android:text="인천 서구 서곶로 299"
                 android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/phoneSeo"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
+                android:gravity="center"
                 android:text="032-560-4295"
                 android:textSize="14sp" />
         </TableRow>
@@ -301,7 +317,7 @@
             <TextView
                 android:id="@+id/junggoo"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
                 android:gravity="center"
                 android:text="중구청"
@@ -310,7 +326,7 @@
             <TextView
                 android:id="@+id/textView28"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
                 android:gravity="center"
                 android:text="복지과"
@@ -319,7 +335,7 @@
             <TextView
                 android:id="@+id/jungAdd"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
                 android:gravity="center"
                 android:text="인천 중구 신포로27번길 80"
@@ -328,7 +344,7 @@
             <TextView
                 android:id="@+id/phoneJung"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:background="@drawable/border"
                 android:gravity="center"
                 android:text="032-760-7521"
