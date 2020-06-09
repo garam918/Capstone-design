@@ -151,7 +151,6 @@ class QrcodeCreate : AppCompatActivity() {
                     } else {
                         val json = obj.toString()
                         val gsonObject = JsonParser().parse(json) as JsonObject
-                        Toast.makeText(this, json, Toast.LENGTH_LONG).show()
                         val hints = Hashtable<EncodeHintType, String>()
                         hints[EncodeHintType.CHARACTER_SET] = "UTF-8"
                         val bitMatrix =

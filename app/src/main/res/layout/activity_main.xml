@@ -16,7 +16,7 @@
         android:layout_marginTop="240dp"
         android:layout_weight="1"
         android:text="무료급식"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/frag"
@@ -25,5 +25,5 @@
         android:layout_marginTop="240dp"
         android:layout_weight="1"
         android:text="노숙인 전용"
-        android:visibility="visible" />
+        android:visibility="gone" />
 </LinearLayout>

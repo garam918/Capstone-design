@@ -124,21 +124,7 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
         MapPoint.mapPointWithGeoCoord(37.4830613330657,126.617699409983),
         MapPoint.mapPointWithGeoCoord(37.5148743484054,126.70453806158)
     )
-    override fun onBackPressed() {
-        lateinit var toast: Toast
-        if (System.currentTimeMillis() >= backKeyPressedTime + 1500) {
-            backKeyPressedTime = System.currentTimeMillis()
-            toast = Toast.makeText(this, "종료 하려면 한번 더 누르세요.", Toast.LENGTH_LONG)
-            toast.show()
-            return
-        }
-        if (System.currentTimeMillis() < backKeyPressedTime + 1500) {
-            finish()
-            moveTaskToBack(true)
-            finishAndRemoveTask()
-            android.os.Process.killProcess(android.os.Process.myPid())
-        }
-    }
+
     override fun onMapViewDoubleTapped(p0: MapView?, p1: MapPoint?) {
     }
     override fun onMapViewDragStarted(p0: MapView?, p1: MapPoint?) {
@@ -180,48 +166,7 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
     }
     override fun onPOIItemSelected(p0: MapView?, p1: MapPOIItem?) {
     }
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflate = menuInflater
-        inflate.inflate(R.menu.menu2,menu)
-        return super.onCreateOptionsMenu(menu)
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-
-        when(item?.itemId){
-        R.id.first-> {
-            val intent = intent
-            val personname = intent.getStringExtra("name")
-            menuCount("${item.title}",personname)
-            val nextIntent = Intent(this,policy::class.java)
-            startActivity(nextIntent)
-        }
-        R.id.second->{
-            val nextIntent = Intent(this,money::class.java)
-            startActivity(nextIntent)
-        }
-        R.id.third->{
-            val intent = intent
-            val name = intent.getStringExtra("name")
-            val date = intent.getStringExtra("date")
-            val sex = intent.getStringExtra("sex")
-            val gohome = intent.getStringExtra("gohome")
-            val year = intent.getStringExtra("year")
-            val faceimg = intent.getStringExtra("Face")
-            val qrimg = intent.getStringExtra("QR")
-            val nextIntent = Intent(this,popup::class.java)
-            nextIntent.putExtra("name",name)
-            nextIntent.putExtra("date",date)
-            nextIntent.putExtra("sex",sex)
-            nextIntent.putExtra("gohome",gohome)
-            nextIntent.putExtra("year",year)
-            nextIntent.putExtra("QR",qrimg)
-            nextIntent.putExtra("Face",faceimg)
-            startActivity(nextIntent)
-        }
-        }
-        return super.onOptionsItemSelected(item)
-    }
     init {
         instance = this
     }
@@ -469,7 +414,6 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
                         mapView.removeAllPOIItems()
                         for (i in 0..array2.size-1) {
                             var marker = MapPOIItem()
-                    //        marker.itemName = map3[i]
                             marker.itemName = resources.getStringArray(R.array.freefoodname)[i].toString()
                             marker.mapPoint = array2[i]
                             marker.tag = i
@@ -485,7 +429,7 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
                         menuCount("${menuItem.title}",personname)
                         mapView.removeAllPOIItems()
                         mapView.setCalloutBalloonAdapter(CustomCalloutBalloonAdapter())
-                        Toast.makeText(this@fragmap,"결과는 반경5Km 이내, 최대 45개까지 표시됩니다.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@fragmap,"결과는 반경5Km 이내, 최대 45개까지 표시됩니다.", Toast.LENGTH_SHORT).show()
                         val retrofit: Retrofit = Retrofit.Builder().baseUrl(KakaoApi.instance.base).addConverterFactory(
                             GsonConverterFactory.create()).build()
                         val networkService = retrofit.create(NetworkService::class.java)
@@ -583,7 +527,6 @@ class fragmap : AppCompatActivity(), MapView.POIItemEventListener, MapView.MapVi
                             marker.isShowDisclosureButtonOnCalloutBalloon = true
                             mapView.addPOIItem(marker)
                         }
-
                     }
                 }
                 return true

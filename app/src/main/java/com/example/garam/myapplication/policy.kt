@@ -110,7 +110,6 @@ class policy : AppCompatActivity() {
                     recycler.visibility = View.INVISIBLE
                     webView.visibility = View.VISIBLE
                     webView.loadUrl(polList.url)
-                    Toast.makeText(this, "${polList.url}", Toast.LENGTH_LONG).show()
                 }
                 recycler.adapter = test
                 test.notifyDataSetChanged()

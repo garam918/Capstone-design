@@ -21,9 +21,6 @@ class Homeless : AppCompatActivity() {
         val faceimg = intent.getStringExtra("Face")
         val qrimg = intent.getStringExtra("QR")
 
-        val userName = findViewById<TextView>(R.id.userName)
-        val userInfo = findViewById<TextView>(R.id.userInfo)
-
         val map = findViewById<Button>(R.id.map)
         val freemoney = findViewById<Button>(R.id.money)
         val info = findViewById<Button>(R.id.info)

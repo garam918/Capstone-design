@@ -70,7 +70,6 @@ class Volunteer : AppCompatActivity() {
         time.text = date_text
         val intent = intent
         info = intent.getStringExtra("info")
-        //info = "만수종합사회복지관"
         val facility = findViewById<TextView>(R.id.facility)
         facility.text = "시설 정보 : $info"
         Log.e("시설","$info")
@@ -115,7 +114,6 @@ class Volunteer : AppCompatActivity() {
         food.setOnClickListener {
             val nextIntent = Intent(this,Food::class.java)
             nextIntent.putExtra("Info",info)
-            //startActivity(nextIntent)
             startActivityForResult(nextIntent,100)
         }
 
@@ -127,7 +125,6 @@ class Volunteer : AppCompatActivity() {
             if (result.contents == null) {
                 Toast.makeText(this, "등록된 정보가 없습니다.", Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(this, "Scanned:${result.contents}", Toast.LENGTH_LONG).show()
                 try {
                     val foodamount = findViewById<TextView>(R.id.foodamount)
                     val img = File(result.barcodeImagePath)
@@ -184,18 +181,13 @@ class Volunteer : AppCompatActivity() {
                 photoBody2
             )
             val nameinfo = RequestBody.create("text/plain".toMediaTypeOrNull(),info)
-
             val postImage : Call<String> = networkService.fda(nameinfo,mImage2)
             postImage.enqueue(object : Callback<String>{
                 override fun onFailure(call: Call<String>, t: Throwable) {
-
                 }
-
                 override fun onResponse(call: Call<String>, response: Response<String>) {
-
                 }
             })
-
         }
     }
 
