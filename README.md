@@ -30,7 +30,7 @@
 - Kotlin
 - Retrofit2:2.7.0
 - Firebase
-- Kakao Map
+- Kakao Map API
 - zxing:3.6.0
   - QR코드 생성 및 인식 라이브러리
 - glide:4.10.0
